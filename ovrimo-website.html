@@ -1,0 +1,2017 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Ovrimo — Building Modern Digital Products</title>
+<meta name="description" content="Ovrimo builds thoughtful digital products designed to simplify everyday work and life. Modern apps and tools focused on clarity, usefulness, and clean design."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #0d1117;
+    --bg2: #111820;
+    --bg3: #161e28;
+    --surface: #1a2232;
+    --surface2: #1f2a3a;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.12);
+    --text: #f0f4f8;
+    --text2: #8b9ab0;
+    --text3: #5a6a7e;
+    --accent: #3b9eff;
+    --accent2: #00d4c8;
+    --accent-glow: rgba(59,158,255,0.15);
+    --accent2-glow: rgba(0,212,200,0.12);
+    --live: #10b981;
+    --live-bg: rgba(16,185,129,0.12);
+    --soon: #f59e0b;
+    --soon-bg: rgba(245,158,11,0.12);
+    --radius: 16px;
+    --radius-sm: 10px;
+    --shadow: 0 4px 32px rgba(0,0,0,0.4);
+    --shadow-lg: 0 8px 64px rgba(0,0,0,0.6);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  h1,h2,h3,h4,h5 { font-family: 'Sora', sans-serif; line-height: 1.2; font-weight: 700; }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+  button { cursor: pointer; font-family: 'DM Sans', sans-serif; border: none; outline: none; }
+  input, textarea, select { font-family: 'DM Sans', sans-serif; }
+
+  /* PAGE SYSTEM */
+  .page { display: none; min-height: 100vh; }
+  .page.active { display: block; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(13,17,23,0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    height: 68px;
+    display: flex; align-items: center;
+    transition: all 0.3s;
+  }
+  .nav-inner {
+    max-width: 1200px; margin: 0 auto; width: 100%;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 10px; cursor: pointer;
+  }
+  .nav-logo img { width: 36px; height: 36px; object-fit: contain; }
+  .nav-logo-text {
+    font-family: 'Sora', sans-serif;
+    font-size: 1.2rem; font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.02em;
+  }
+  .nav-links { display: flex; align-items: center; gap: 0.25rem; }
+  .nav-links a {
+    padding: 0.45rem 1rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text2);
+    border-radius: 8px;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+  .nav-links a:hover, .nav-links a.active-link { color: var(--text); background: var(--surface); }
+  .nav-cta {
+    background: var(--accent);
+    color: white !important;
+    padding: 0.45rem 1.2rem !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    transition: all 0.2s !important;
+  }
+  .nav-cta:hover { background: #2d8eef !important; transform: translateY(-1px); box-shadow: 0 4px 20px rgba(59,158,255,0.35) !important; }
+  .hamburger {
+    display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px;
+  }
+  .hamburger span { display: block; width: 22px; height: 2px; background: var(--text2); border-radius: 2px; transition: all 0.3s; }
+  .mobile-menu {
+    display: none; position: fixed; top: 68px; left: 0; right: 0; z-index: 999;
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 2rem 1.5rem;
+    flex-direction: column; gap: 0.25rem;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    padding: 0.75rem 1rem;
+    font-size: 1rem; font-weight: 500;
+    color: var(--text2);
+    border-radius: 8px;
+    transition: all 0.2s;
+    cursor: pointer;
+    border-bottom: 1px solid var(--border);
+  }
+  .mobile-menu a:last-child { border-bottom: none; }
+  .mobile-menu a:hover { color: var(--text); background: var(--surface); }
+
+  /* LAYOUT */
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+  .section { padding: 6rem 0; }
+  .section-sm { padding: 4rem 0; }
+  .pt-nav { padding-top: 68px; }
+
+  /* TYPOGRAPHY */
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-size: 0.8rem; font-weight: 600; letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+    font-family: 'Sora', sans-serif;
+  }
+  .eyebrow::before {
+    content: ''; display: block;
+    width: 20px; height: 2px;
+    background: var(--accent);
+    border-radius: 2px;
+  }
+  .display-xl {
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+  }
+  .display-lg {
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.15;
+  }
+  .display-md {
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+  .gradient-text {
+    background: linear-gradient(135deg, #ffffff 30%, #3b9eff 70%, #00d4c8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .gradient-text-accent {
+    background: linear-gradient(135deg, #3b9eff, #00d4c8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .lead {
+    font-size: 1.15rem;
+    color: var(--text2);
+    line-height: 1.7;
+    font-weight: 400;
+  }
+  .text-center { text-align: center; }
+  .text-sm { font-size: 0.875rem; }
+  .text-xs { font-size: 0.75rem; }
+
+  /* BUTTONS */
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.8rem 1.8rem;
+    border-radius: 10px;
+    font-weight: 600; font-size: 0.95rem;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: white;
+    box-shadow: 0 4px 24px rgba(59,158,255,0.3);
+  }
+  .btn-primary:hover { background: #2d8eef; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(59,158,255,0.45); }
+  .btn-secondary {
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--border2);
+  }
+  .btn-secondary:hover { background: var(--surface2); border-color: rgba(255,255,255,0.2); transform: translateY(-1px); }
+  .btn-ghost {
+    background: transparent;
+    color: var(--accent);
+    padding: 0.7rem 1.4rem;
+    border: 1px solid rgba(59,158,255,0.3);
+  }
+  .btn-ghost:hover { background: var(--accent-glow); }
+  .btn-lg { padding: 1rem 2.2rem; font-size: 1.05rem; border-radius: 12px; }
+  .btn-sm { padding: 0.5rem 1.1rem; font-size: 0.85rem; border-radius: 8px; }
+
+  /* CARDS */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: all 0.3s;
+  }
+  .card:hover {
+    border-color: var(--border2);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow);
+  }
+
+  /* BADGE */
+  .badge {
+    display: inline-flex; align-items: center; gap: 0.35rem;
+    padding: 0.3rem 0.75rem;
+    border-radius: 100px;
+    font-size: 0.75rem; font-weight: 600;
+    font-family: 'Sora', sans-serif;
+    letter-spacing: 0.03em;
+  }
+  .badge-live { color: var(--live); background: var(--live-bg); }
+  .badge-soon { color: var(--soon); background: var(--soon-bg); }
+  .badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+
+  /* DIVIDER */
+  .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+  /* SECTION HEADER */
+  .section-header { max-width: 640px; margin-bottom: 4rem; }
+  .section-header.center { margin: 0 auto 4rem; text-align: center; }
+  .section-header.center .eyebrow { justify-content: center; }
+  .section-header.center .eyebrow::before { display: none; }
+  .section-header .lead { margin-top: 1rem; }
+
+  /* ================
+     HOME PAGE
+  ================ */
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    position: relative;
+    overflow: hidden;
+    background: var(--bg);
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    pointer-events: none;
+  }
+  .hero-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.2;
+  }
+  .hero-orb-1 { width: 600px; height: 600px; background: #3b9eff; top: -200px; right: -100px; }
+  .hero-orb-2 { width: 400px; height: 400px; background: #00d4c8; bottom: -100px; left: -50px; opacity: 0.12; }
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(59,158,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(59,158,255,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 0%, transparent 100%);
+  }
+  .hero-content {
+    position: relative; z-index: 2;
+    padding-top: 130px; padding-bottom: 80px;
+    width: 100%;
+  }
+  .hero-inner {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 4rem; align-items: center;
+  }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    padding: 0.4rem 1rem;
+    border-radius: 100px;
+    border: 1px solid rgba(59,158,255,0.25);
+    background: rgba(59,158,255,0.08);
+    font-size: 0.8rem; font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 1.75rem;
+    font-family: 'Sora', sans-serif;
+    letter-spacing: 0.05em;
+  }
+  .hero-title { margin-bottom: 1.5rem; }
+  .hero-desc { margin-bottom: 2.5rem; max-width: 480px; }
+  .hero-actions { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+  .hero-visual {
+    display: flex; align-items: center; justify-content: center;
+  }
+  .hero-logo-container {
+    position: relative;
+    width: 340px; height: 340px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .hero-logo-ring {
+    position: absolute; inset: 0;
+    border-radius: 50%;
+    border: 1px solid rgba(59,158,255,0.15);
+    animation: ring-pulse 3s ease-in-out infinite;
+  }
+  .hero-logo-ring:nth-child(2) {
+    inset: -30px;
+    border-color: rgba(0,212,200,0.08);
+    animation-delay: 1s;
+  }
+  .hero-logo-ring:nth-child(3) {
+    inset: -60px;
+    border-color: rgba(59,158,255,0.05);
+    animation-delay: 2s;
+  }
+  @keyframes ring-pulse {
+    0%, 100% { opacity: 0.5; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.02); }
+  }
+  .hero-logo-glow {
+    position: absolute;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(59,158,255,0.2) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero-logo-img {
+    width: 200px; height: 200px;
+    object-fit: contain;
+    position: relative; z-index: 2;
+    filter: drop-shadow(0 0 40px rgba(59,158,255,0.3));
+    animation: float 4s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+
+  /* STATS */
+  .stats-bar {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 2.5rem 0;
+  }
+  .stats-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    max-width: 1200px; margin: 0 auto; padding: 0 2rem;
+  }
+  .stat-item { text-align: center; }
+  .stat-value {
+    font-family: 'Sora', sans-serif;
+    font-size: 2rem; font-weight: 800;
+    color: var(--text);
+    letter-spacing: -0.03em;
+  }
+  .stat-label { font-size: 0.85rem; color: var(--text3); margin-top: 0.25rem; font-weight: 500; }
+
+  /* FEATURED PRODUCT */
+  .featured-product {
+    background: linear-gradient(135deg, var(--surface) 0%, rgba(59,158,255,0.05) 100%);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 3rem;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 3rem; align-items: center;
+    position: relative; overflow: hidden;
+  }
+  .featured-product::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(59,158,255,0.5), rgba(0,212,200,0.5), transparent);
+  }
+  .featured-accent {
+    position: absolute; top: -60px; right: -60px;
+    width: 250px; height: 250px;
+    background: radial-gradient(circle, rgba(59,158,255,0.12) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .fp-tag {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--accent2);
+    margin-bottom: 1.25rem;
+    font-family: 'Sora', sans-serif;
+  }
+  .fp-name {
+    font-size: 2.5rem; font-weight: 800;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.75rem;
+  }
+  .fp-desc { color: var(--text2); margin-bottom: 2rem; font-size: 1.05rem; }
+  .fp-features { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 2.25rem; }
+  .fp-features li {
+    display: flex; align-items: center; gap: 0.6rem;
+    font-size: 0.9rem; color: var(--text2);
+  }
+  .fp-features li::before {
+    content: '✓';
+    width: 20px; height: 20px;
+    background: rgba(16,185,129,0.15);
+    color: var(--live);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.7rem; font-weight: 700;
+    flex-shrink: 0;
+  }
+  .fp-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .fp-visual {
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  .fp-mockup {
+    width: 280px; height: 380px;
+    background: var(--bg2);
+    border: 1px solid var(--border2);
+    border-radius: 28px;
+    display: flex; flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.5);
+    position: relative;
+  }
+  .fp-mockup-header {
+    padding: 1.5rem 1.5rem 1rem;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .fp-mockup-icon {
+    width: 36px; height: 36px;
+    background: linear-gradient(135deg, #3b9eff, #00d4c8);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+  }
+  .fp-mockup-title { font-family: 'Sora', sans-serif; font-size: 0.85rem; font-weight: 700; }
+  .fp-mockup-sub { font-size: 0.7rem; color: var(--text3); }
+  .fp-mockup-body { padding: 1rem 1.25rem; flex: 1; display: flex; flex-direction: column; gap: 0.75rem; }
+  .fp-task {
+    background: var(--surface2);
+    border-radius: 10px; padding: 0.75rem 1rem;
+    border-left: 3px solid var(--accent);
+  }
+  .fp-task-title { font-size: 0.8rem; font-weight: 600; margin-bottom: 0.2rem; }
+  .fp-task-meta { font-size: 0.7rem; color: var(--text3); }
+  .fp-task:nth-child(2) { border-left-color: var(--accent2); }
+  .fp-task:nth-child(3) { border-left-color: #a78bfa; opacity: 0.6; }
+  .fp-mockup-footer {
+    padding: 1rem 1.25rem;
+    border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .fp-progress-bar {
+    flex: 1; height: 4px;
+    background: var(--surface2);
+    border-radius: 4px; overflow: hidden; margin-right: 0.75rem;
+  }
+  .fp-progress-fill {
+    height: 100%; width: 65%;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    border-radius: 4px;
+  }
+  .fp-progress-label { font-size: 0.7rem; color: var(--text3); font-weight: 600; }
+
+  /* WHAT WE BUILD */
+  .build-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .build-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 2rem;
+    transition: all 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .build-card::after {
+    content: ''; position: absolute;
+    inset: 0; border-radius: var(--radius);
+    background: linear-gradient(135deg, rgba(59,158,255,0.05) 0%, transparent 100%);
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .build-card:hover::after { opacity: 1; }
+  .build-card:hover { border-color: rgba(59,158,255,0.2); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
+  .build-icon {
+    width: 52px; height: 52px;
+    background: var(--surface2);
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 1.25rem;
+    border: 1px solid var(--border);
+    position: relative; z-index: 1;
+  }
+  .build-card h3 {
+    font-size: 1.1rem; font-weight: 700;
+    margin-bottom: 0.6rem;
+    position: relative; z-index: 1;
+  }
+  .build-card p {
+    font-size: 0.9rem; color: var(--text2);
+    line-height: 1.65;
+    position: relative; z-index: 1;
+  }
+
+  /* WHY OVRIMO */
+  .why-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+  .why-item {
+    display: flex; gap: 1.25rem;
+    padding: 1.75rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    transition: all 0.2s;
+  }
+  .why-item:hover { border-color: var(--border2); }
+  .why-num {
+    font-family: 'Sora', sans-serif;
+    font-size: 2rem; font-weight: 800;
+    color: rgba(59,158,255,0.2);
+    line-height: 1;
+    flex-shrink: 0; min-width: 2ch;
+  }
+  .why-content h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.4rem; }
+  .why-content p { font-size: 0.875rem; color: var(--text2); line-height: 1.65; }
+
+  /* CTA SECTION */
+  .cta-section {
+    background: linear-gradient(135deg, rgba(59,158,255,0.08) 0%, rgba(0,212,200,0.05) 100%);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 6rem 0;
+    text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .cta-section::before {
+    content: '';
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+    width: 600px; height: 300px;
+    background: radial-gradient(ellipse, rgba(59,158,255,0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .cta-section .display-lg { margin-bottom: 1rem; }
+  .cta-section .lead { margin-bottom: 2.5rem; max-width: 480px; margin-left: auto; margin-right: auto; }
+  .cta-actions { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; position: relative; z-index: 1; }
+
+  /* NEWSLETTER */
+  .newsletter-section {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 4rem 0;
+  }
+  .newsletter-inner {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 3rem; align-items: center;
+  }
+  .newsletter-form { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+  .newsletter-input {
+    flex: 1; min-width: 220px;
+    background: var(--bg2);
+    border: 1px solid var(--border2);
+    border-radius: 10px;
+    padding: 0.8rem 1.2rem;
+    color: var(--text);
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .newsletter-input:focus { border-color: var(--accent); }
+  .newsletter-input::placeholder { color: var(--text3); }
+  .newsletter-note { font-size: 0.8rem; color: var(--text3); margin-top: 0.5rem; }
+
+  /* FOOTER */
+  footer {
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    padding: 4rem 0 2rem;
+  }
+  .footer-grid {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem; margin-bottom: 3rem;
+  }
+  .footer-brand .nav-logo { margin-bottom: 1rem; }
+  .footer-desc { font-size: 0.875rem; color: var(--text3); line-height: 1.7; max-width: 280px; }
+  .footer-col h4 {
+    font-family: 'Sora', sans-serif;
+    font-size: 0.8rem; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--text3); margin-bottom: 1.25rem;
+  }
+  .footer-links { display: flex; flex-direction: column; gap: 0.6rem; }
+  .footer-links a {
+    font-size: 0.875rem; color: var(--text2);
+    cursor: pointer; transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--text); }
+  .footer-bottom {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-top: 2rem; border-top: 1px solid var(--border);
+    font-size: 0.8rem; color: var(--text3);
+    flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-legal { display: flex; gap: 1.5rem; }
+  .footer-legal a { color: var(--text3); cursor: pointer; transition: color 0.2s; }
+  .footer-legal a:hover { color: var(--text2); }
+
+  /* ================
+     ABOUT PAGE
+  ================ */
+  .page-hero {
+    padding-top: calc(68px + 5rem);
+    padding-bottom: 5rem;
+    position: relative; overflow: hidden;
+  }
+  .page-hero-bg {
+    position: absolute; inset: 0; pointer-events: none;
+  }
+  .page-hero-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.15;
+  }
+  .page-hero-orb-1 { width: 400px; height: 400px; background: #3b9eff; top: -100px; right: 0; }
+  .page-hero-orb-2 { width: 300px; height: 300px; background: #00d4c8; bottom: 0; left: 10%; opacity: 0.08; }
+  .page-hero-content { position: relative; z-index: 2; }
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 4rem; align-items: center;
+    margin-bottom: 5rem;
+  }
+  .about-visual {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 2.5rem;
+    position: relative; overflow: hidden;
+  }
+  .about-visual::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(59,158,255,0.4), transparent);
+  }
+  .about-logo-display {
+    display: flex; align-items: center; justify-content: center;
+    padding: 2rem 0;
+  }
+  .about-logo-display img { width: 180px; height: 180px; object-fit: contain; }
+  .mission-block {
+    background: linear-gradient(135deg, var(--surface) 0%, rgba(59,158,255,0.05) 100%);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 2.5rem;
+    margin-bottom: 5rem;
+    position: relative; overflow: hidden;
+  }
+  .mission-block::before {
+    content: '"';
+    font-family: 'Sora', sans-serif;
+    font-size: 8rem; font-weight: 800;
+    color: rgba(59,158,255,0.07);
+    position: absolute; top: -1rem; left: 1rem;
+    line-height: 1;
+  }
+  .mission-text {
+    font-size: 1.35rem; font-weight: 500;
+    color: var(--text);
+    line-height: 1.6;
+    font-style: italic;
+    position: relative; z-index: 1;
+    max-width: 680px;
+  }
+  .values-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+  .value-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 2rem 1.5rem;
+    text-align: center;
+    transition: all 0.25s;
+  }
+  .value-card:hover { border-color: rgba(59,158,255,0.25); transform: translateY(-4px); }
+  .value-emoji { font-size: 2.5rem; margin-bottom: 1rem; display: block; }
+  .value-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .value-card p { font-size: 0.85rem; color: var(--text2); line-height: 1.6; }
+
+  /* ================
+     PRODUCTS PAGE
+  ================ */
+  .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; }
+  .product-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 2rem;
+    display: flex; flex-direction: column;
+    transition: all 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .product-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .product-card:hover { border-color: rgba(59,158,255,0.25); transform: translateY(-4px); box-shadow: var(--shadow); }
+  .product-card:hover::before { opacity: 1; }
+  .pc-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 1.25rem; }
+  .pc-icon {
+    width: 56px; height: 56px;
+    background: var(--bg2);
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.75rem;
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+  .pc-icon img { width: 40px; height: 40px; object-fit: contain; }
+  .pc-category { font-size: 0.75rem; color: var(--text3); font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; font-family: 'Sora', sans-serif; }
+  .pc-name { font-size: 1.3rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .pc-tagline { font-size: 0.875rem; color: var(--text2); margin-bottom: 0.75rem; font-weight: 500; }
+  .pc-desc { font-size: 0.875rem; color: var(--text2); line-height: 1.65; flex: 1; }
+  .pc-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid var(--border); flex-wrap: wrap; gap: 0.75rem; }
+  .pc-links { display: flex; gap: 0.5rem; }
+
+  /* PRODUCT DETAIL */
+  .pd-hero {
+    padding-top: calc(68px + 4rem);
+    padding-bottom: 4rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .pd-hero-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .pd-icon-wrap { margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem; }
+  .pd-icon {
+    width: 72px; height: 72px;
+    background: var(--surface);
+    border-radius: 18px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2.5rem;
+    border: 1px solid var(--border);
+  }
+  .pd-name { font-size: 3rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 0.75rem; }
+  .pd-tagline { font-size: 1.2rem; color: var(--text2); margin-bottom: 2rem; }
+  .pd-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .pd-mockup-area {
+    display: flex; align-items: center; justify-content: center;
+    height: 360px;
+  }
+  .pd-screenshot-placeholder {
+    width: 100%; height: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 1rem;
+    color: var(--text3);
+  }
+  .pd-screenshot-icon { font-size: 3rem; opacity: 0.4; }
+  .pd-content { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+  .pd-section { padding: 4rem 0; border-bottom: 1px solid var(--border); }
+  .pd-section:last-child { border-bottom: none; }
+  .pd-features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-top: 2.5rem; }
+  .pd-feature {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 1.5rem;
+    transition: all 0.2s;
+  }
+  .pd-feature:hover { border-color: var(--border2); }
+  .pd-feature-icon { font-size: 1.5rem; margin-bottom: 0.75rem; }
+  .pd-feature h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.4rem; }
+  .pd-feature p { font-size: 0.85rem; color: var(--text2); line-height: 1.6; }
+  .pd-faq { margin-top: 2.5rem; }
+  .faq-item {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    margin-bottom: 0.75rem;
+    transition: border-color 0.2s;
+  }
+  .faq-item.open { border-color: rgba(59,158,255,0.25); }
+  .faq-q {
+    padding: 1.25rem 1.5rem;
+    cursor: pointer;
+    display: flex; justify-content: space-between; align-items: center;
+    font-weight: 600; font-size: 0.95rem;
+    background: var(--surface);
+    transition: background 0.2s;
+    user-select: none;
+  }
+  .faq-q:hover { background: var(--surface2); }
+  .faq-chevron { font-size: 0.8rem; color: var(--text3); transition: transform 0.3s; }
+  .faq-item.open .faq-chevron { transform: rotate(180deg); }
+  .faq-a {
+    display: none;
+    padding: 1.25rem 1.5rem;
+    font-size: 0.9rem; color: var(--text2); line-height: 1.7;
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+  }
+  .faq-item.open .faq-a { display: block; }
+  .pd-links-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+  .pd-link-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.2s;
+  }
+  .pd-link-card:hover { border-color: rgba(59,158,255,0.25); background: var(--surface2); cursor: pointer; }
+  .pd-link-icon { font-size: 1.75rem; margin-bottom: 0.5rem; }
+  .pd-link-label { font-size: 0.8rem; color: var(--text3); margin-bottom: 0.25rem; font-weight: 500; }
+  .pd-link-value { font-size: 0.9rem; font-weight: 600; color: var(--accent); }
+
+  /* ================
+     CONTACT PAGE
+  ================ */
+  .contact-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 4rem; align-items: start; }
+  .contact-info-item { display: flex; gap: 1rem; align-items: flex-start; margin-bottom: 2rem; }
+  .ci-icon {
+    width: 44px; height: 44px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+  .ci-label { font-size: 0.8rem; color: var(--text3); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; font-family: 'Sora', sans-serif; margin-bottom: 0.25rem; }
+  .ci-value { font-size: 0.95rem; color: var(--text2); }
+  .contact-form-wrapper {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 2.5rem;
+    position: relative; overflow: hidden;
+  }
+  .contact-form-wrapper::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(59,158,255,0.4), rgba(0,212,200,0.4), transparent);
+  }
+  .form-group { margin-bottom: 1.5rem; }
+  .form-label {
+    display: block; font-size: 0.85rem; font-weight: 600;
+    color: var(--text2); margin-bottom: 0.5rem;
+    font-family: 'Sora', sans-serif;
+  }
+  .form-input, .form-textarea, .form-select {
+    width: 100%;
+    background: var(--bg2);
+    border: 1px solid var(--border2);
+    border-radius: 10px;
+    padding: 0.85rem 1.1rem;
+    color: var(--text);
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    -webkit-appearance: none;
+  }
+  .form-input:focus, .form-textarea:focus, .form-select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(59,158,255,0.1);
+  }
+  .form-input::placeholder, .form-textarea::placeholder { color: var(--text3); }
+  .form-textarea { resize: vertical; min-height: 130px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-error { font-size: 0.8rem; color: #f87171; margin-top: 0.35rem; display: none; }
+  .form-error.show { display: block; }
+  .form-success {
+    display: none;
+    text-align: center;
+    padding: 2.5rem;
+  }
+  .form-success.show { display: block; }
+  .form-success-icon { font-size: 3.5rem; margin-bottom: 1rem; }
+  .form-success h3 { font-size: 1.3rem; margin-bottom: 0.5rem; }
+  .form-success p { color: var(--text2); font-size: 0.9rem; }
+  .partnerships-block {
+    background: linear-gradient(135deg, rgba(59,158,255,0.06) 0%, rgba(0,212,200,0.04) 100%);
+    border: 1px solid rgba(59,158,255,0.2);
+    border-radius: var(--radius);
+    padding: 2rem;
+    margin-top: 2.5rem;
+  }
+  .partnerships-block h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .partnerships-block p { font-size: 0.875rem; color: var(--text2); line-height: 1.65; }
+
+  /* ================
+     LEGAL PAGES
+  ================ */
+  .legal-content {
+    max-width: 760px;
+    margin: 0 auto;
+    padding-top: calc(68px + 4rem);
+    padding-bottom: 6rem;
+  }
+  .legal-content h1 { margin-bottom: 0.5rem; font-size: 2.5rem; }
+  .legal-date { font-size: 0.85rem; color: var(--text3); margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }
+  .legal-section { margin-bottom: 3rem; }
+  .legal-section h2 {
+    font-size: 1.2rem; font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--text);
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .legal-section p { font-size: 0.9rem; color: var(--text2); line-height: 1.8; margin-bottom: 1rem; }
+  .legal-section ul { margin-left: 1.5rem; }
+  .legal-section li { font-size: 0.9rem; color: var(--text2); line-height: 1.8; }
+  .legal-placeholder {
+    background: rgba(59,158,255,0.06);
+    border: 1px dashed rgba(59,158,255,0.2);
+    border-radius: 8px; padding: 1rem 1.25rem;
+    font-size: 0.85rem; color: var(--accent); font-style: italic;
+    margin-bottom: 1rem;
+  }
+
+  /* ================
+     BACK BUTTON
+  ================ */
+  .back-btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-size: 0.85rem; color: var(--text3);
+    cursor: pointer; transition: color 0.2s;
+    margin-bottom: 2rem;
+    font-weight: 500;
+  }
+  .back-btn:hover { color: var(--text); }
+
+  /* UPDATES PLACEHOLDER */
+  .updates-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .update-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.75rem;
+    transition: all 0.2s;
+  }
+  .update-card:hover { border-color: var(--border2); }
+  .update-date { font-size: 0.75rem; color: var(--text3); font-weight: 600; font-family: 'Sora', sans-serif; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.75rem; }
+  .update-card h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .update-card p { font-size: 0.85rem; color: var(--text2); line-height: 1.6; }
+  .update-tag {
+    display: inline-block; margin-top: 1rem;
+    font-size: 0.7rem; padding: 0.2rem 0.6rem;
+    border-radius: 6px; font-weight: 700;
+    font-family: 'Sora', sans-serif;
+    background: rgba(59,158,255,0.1); color: var(--accent);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 960px) {
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-visual { display: none; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .featured-product { grid-template-columns: 1fr; }
+    .fp-visual { display: none; }
+    .build-grid { grid-template-columns: repeat(2, 1fr); }
+    .why-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .about-grid { grid-template-columns: 1fr; }
+    .values-grid { grid-template-columns: repeat(2, 1fr); }
+    .contact-grid { grid-template-columns: 1fr; }
+    .pd-hero-inner { grid-template-columns: 1fr; }
+    .pd-mockup-area { display: none; }
+    .pd-features-grid { grid-template-columns: repeat(2, 1fr); }
+    .newsletter-inner { grid-template-columns: 1fr; }
+    .updates-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 640px) {
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .build-grid { grid-template-columns: 1fr; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .footer-grid { grid-template-columns: 1fr; }
+    .values-grid { grid-template-columns: 1fr; }
+    .pd-features-grid { grid-template-columns: 1fr; }
+    .pd-links-grid { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .hero-actions { flex-direction: column; align-items: flex-start; }
+    .cta-actions { flex-direction: column; align-items: center; }
+    .display-xl { font-size: 2.4rem; }
+    .section { padding: 4rem 0; }
+    .container { padding: 0 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo" onclick="navigate('home')">
+      <img src="https://raw.githubusercontent.com/nicehash/NiceHashQuickMiner/master/logo.png" onerror="this.style.display='none'; this.nextSibling.style.display='flex'" style="display:none"/>
+      <div style="display:flex;width:36px;height:36px;background:linear-gradient(135deg,#3b9eff,#00d4c8);border-radius:10px;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-weight:800;font-size:1rem;color:white;">O</div>
+      <span class="nav-logo-text">Ovrimo</span>
+    </div>
+    <div class="nav-links">
+      <a onclick="navigate('home')" id="nav-home">Home</a>
+      <a onclick="navigate('about')" id="nav-about">About</a>
+      <a onclick="navigate('products')" id="nav-products">Products</a>
+      <a onclick="navigate('contact')" id="nav-contact" class="nav-cta">Contact</a>
+    </div>
+    <div class="hamburger" onclick="toggleMenu()" id="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a onclick="navigate('home');closeMenu()">Home</a>
+  <a onclick="navigate('about');closeMenu()">About</a>
+  <a onclick="navigate('products');closeMenu()">Products</a>
+  <a onclick="navigate('contact');closeMenu()">Contact</a>
+</div>
+
+<!-- ========== HOME PAGE ========== -->
+<div class="page active" id="page-home">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg">
+      <div class="hero-orb hero-orb-1"></div>
+      <div class="hero-orb hero-orb-2"></div>
+      <div class="hero-grid"></div>
+    </div>
+    <div class="container hero-content">
+      <div class="hero-inner">
+        <div class="hero-text">
+          <div class="hero-tag">✦ Thoughtful Digital Products</div>
+          <h1 class="display-xl hero-title">
+            Built for Clarity.<br/>
+            <span class="gradient-text">Designed to Help.</span>
+          </h1>
+          <p class="lead hero-desc">
+            Ovrimo builds thoughtful digital products designed to simplify everyday work and life. Modern apps and tools focused on clarity, usefulness, and clean design.
+          </p>
+          <div class="hero-actions">
+            <button class="btn btn-primary btn-lg" onclick="navigate('products')">View Products</button>
+            <button class="btn btn-secondary btn-lg" onclick="navigate('contact')">Get in Touch</button>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="hero-logo-container">
+            <div class="hero-logo-ring"></div>
+            <div class="hero-logo-ring"></div>
+            <div class="hero-logo-ring"></div>
+            <div class="hero-logo-glow"></div>
+            <div style="position:relative;z-index:2;animation:float 4s ease-in-out infinite">
+              <div style="width:200px;height:200px;background:linear-gradient(135deg,rgba(59,158,255,0.1),rgba(0,212,200,0.1));border-radius:50%;display:flex;align-items:center;justify-content:center;border:1px solid rgba(59,158,255,0.2);backdrop-filter:blur(10px);">
+                <div style="width:120px;height:120px;background:linear-gradient(135deg,#3b9eff,#00d4c8);border-radius:32px;display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-size:4rem;font-weight:800;color:white;box-shadow:0 20px 60px rgba(59,158,255,0.4);">O</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-value gradient-text-accent">2024</div>
+        <div class="stat-label">Founded</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value gradient-text-accent">1+</div>
+        <div class="stat-label">Live Products</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value gradient-text-accent">∞</div>
+        <div class="stat-label">Ideas in Progress</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value gradient-text-accent">100%</div>
+        <div class="stat-label">Independent</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEATURED PRODUCT -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="eyebrow">Featured Product</div>
+        <h2 class="display-lg">Our Flagship App</h2>
+        <p class="lead">The first product out of the Ovrimo workshop — built to help you stay focused and get things done.</p>
+      </div>
+      <div class="featured-product">
+        <div class="featured-accent"></div>
+        <div class="fp-left">
+          <div class="fp-tag">🚀 Live Now</div>
+          <h3 class="fp-name gradient-text-accent">ModeDo</h3>
+          <p class="fp-desc">ModeDo is a clean, focused productivity app that helps you organize tasks and stay in flow. Built to feel simple, reliable, and genuinely helpful — without the bloat.</p>
+          <ul class="fp-features">
+            <li>Smart task organization with mode-based contexts</li>
+            <li>Clean, minimal interface that gets out of your way</li>
+            <li>Designed for focus, not feature overload</li>
+            <li>Available on web and mobile</li>
+          </ul>
+          <div class="fp-actions">
+            <button class="btn btn-primary" onclick="navigate('product-modedo')">View ModeDo</button>
+            <a href="https://www.modedo.app" target="_blank" rel="noopener" class="btn btn-secondary">modedo.app ↗</a>
+          </div>
+        </div>
+        <div class="fp-visual">
+          <div class="fp-mockup">
+            <div class="fp-mockup-header">
+              <div class="fp-mockup-icon">✓</div>
+              <div>
+                <div class="fp-mockup-title">ModeDo</div>
+                <div class="fp-mockup-sub">Work Mode · 4 tasks today</div>
+              </div>
+            </div>
+            <div class="fp-mockup-body">
+              <div class="fp-task">
+                <div class="fp-task-title">Finish quarterly report</div>
+                <div class="fp-task-meta">Due today · High priority</div>
+              </div>
+              <div class="fp-task">
+                <div class="fp-task-title">Review design mockups</div>
+                <div class="fp-task-meta">Due tomorrow · Medium</div>
+              </div>
+              <div class="fp-task">
+                <div class="fp-task-title">Send client follow-up</div>
+                <div class="fp-task-meta">Due Friday · Waiting</div>
+              </div>
+            </div>
+            <div class="fp-mockup-footer">
+              <div class="fp-progress-bar"><div class="fp-progress-fill"></div></div>
+              <div class="fp-progress-label">65%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT WE BUILD -->
+  <section class="section" style="background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+    <div class="container">
+        <div class="section-header center">
+        <div class="eyebrow">What We Build</div>
+        <h2 class="display-lg">Software with Purpose</h2>
+        <p class="lead">We create modern apps and tools focused on clarity, usefulness, and clean design — built to feel simple, reliable, and genuinely helpful.</p>
+      </div>
+      <div class="build-grid">
+        <div class="build-card">
+          <div class="build-icon">📱</div>
+          <h3>Mobile Apps</h3>
+          <p>Native-quality mobile experiences built for iOS and Android — fast, intuitive, and designed to fit naturally into people's routines.</p>
+        </div>
+        <div class="build-card">
+          <div class="build-icon">🌐</div>
+          <h3>Web Tools</h3>
+          <p>Lightweight, powerful web applications that work everywhere. No install required. No friction — just productivity from day one.</p>
+        </div>
+        <div class="build-card">
+          <div class="build-icon">⚙️</div>
+          <h3>Productivity Software</h3>
+          <p>Apps focused on helping people do their best work. Thoughtfully scoped features that solve real problems without getting in the way.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY OVRIMO -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="eyebrow">Why Ovrimo</div>
+        <h2 class="display-lg">Built Different,<br/>By Design</h2>
+        <p class="lead">We don't ship features for the sake of features. Every decision is made with the end user in mind.</p>
+      </div>
+      <div class="why-grid">
+        <div class="why-item">
+          <div class="why-num">01</div>
+          <div class="why-content">
+            <h3>Radical Simplicity</h3>
+            <p>We believe the best products do fewer things extraordinarily well. Every feature earns its place or gets cut.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-num">02</div>
+          <div class="why-content">
+            <h3>Thoughtful Design</h3>
+            <p>Design isn't decoration — it's how the product works. We sweat the details so our users don't have to think about them.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-num">03</div>
+          <div class="why-content">
+            <h3>Real Usefulness</h3>
+            <p>Every product we ship solves a problem we've felt personally. No ideas searching for a problem to fix.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-num">04</div>
+          <div class="why-content">
+            <h3>Independent & Focused</h3>
+            <p>No VC pressure, no endless pivot cycles. Just a small team shipping products we believe in, at a pace we can sustain.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LATEST UPDATES -->
+  <section class="section" style="background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+    <div class="container">
+      <div class="section-header">
+        <div class="eyebrow">Latest</div>
+        <h2 class="display-md">Updates & News</h2>
+        <p class="lead">What's been happening at Ovrimo lately.</p>
+      </div>
+      <div class="updates-grid">
+        <div class="update-card">
+          <div class="update-date">March 2025</div>
+          <h4>ModeDo Launches on the Web</h4>
+          <p>Our first product, ModeDo, is officially live at modedo.app. Try it free today.</p>
+          <span class="update-tag">🚀 Launch</span>
+        </div>
+        <div class="update-card">
+          <div class="update-date">Coming Soon</div>
+          <h4>New Products in Development</h4>
+          <p>The next set of Ovrimo products are underway. Sign up for updates to be the first to know.</p>
+          <span class="update-tag">📣 Announcement</span>
+        </div>
+        <div class="update-card">
+          <div class="update-date">Ongoing</div>
+          <h4>ModeDo v1.x Updates</h4>
+          <p>Continuous improvements rolling out to ModeDo based on user feedback. See what's new in the app.</p>
+          <span class="update-tag">🔧 Update</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <div class="container">
+      <div class="eyebrow" style="justify-content:center;display:flex;margin-bottom:1rem;">Ready to explore?</div>
+      <h2 class="display-lg" style="margin-bottom:1rem;">See What We've Built</h2>
+      <p class="lead" style="margin-bottom:2.5rem;max-width:480px;margin-left:auto;margin-right:auto;">Explore our products — starting with ModeDo, our flagship productivity app — or reach out to say hello.</p>
+      <div class="cta-actions">
+        <button class="btn btn-primary btn-lg" onclick="navigate('products')">View All Products</button>
+        <button class="btn btn-secondary btn-lg" onclick="navigate('contact')">Contact Us</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- NEWSLETTER -->
+  <div class="newsletter-section">
+    <div class="container">
+      <div class="newsletter-inner">
+        <div>
+          <div class="eyebrow">Stay Updated</div>
+          <h3 style="font-size:1.5rem;font-weight:700;margin-bottom:0.5rem;">Get product updates & news</h3>
+          <p class="lead" style="font-size:0.95rem;">Be the first to know when we launch new products or release major updates.</p>
+        </div>
+        <div>
+          <div class="newsletter-form">
+            <input type="email" class="newsletter-input" placeholder="your@email.com"/>
+            <button class="btn btn-primary" onclick="handleNewsletter()">Subscribe</button>
+          </div>
+          <div class="newsletter-note">No spam. Unsubscribe anytime. We respect your inbox.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="nav-logo" onclick="navigate('home')">
+            <div style="width:32px;height:32px;background:linear-gradient(135deg,#3b9eff,#00d4c8);border-radius:9px;display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-weight:800;font-size:0.9rem;color:white;">O</div>
+            <span class="nav-logo-text">Ovrimo</span>
+          </div>
+          <p class="footer-desc">Ovrimo builds thoughtful digital products designed to simplify everyday work and life. Modern apps focused on clarity, usefulness, and clean design.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <div class="footer-links">
+            <a onclick="navigate('home')">Home</a>
+            <a onclick="navigate('about')">About Us</a>
+            <a onclick="navigate('products')">Products</a>
+            <a onclick="navigate('contact')">Contact</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Products</h4>
+          <div class="footer-links">
+            <a onclick="navigate('product-modedo')">ModeDo</a>
+            <a style="color:var(--text3)">More coming soon</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <div class="footer-links">
+            <a onclick="navigate('privacy')">Privacy Policy</a>
+            <a onclick="navigate('terms')">Terms of Use</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2025 Ovrimo LLC. All rights reserved.</div>
+        <div class="footer-legal">
+          <a onclick="navigate('privacy')">Privacy</a>
+          <a onclick="navigate('terms')">Terms</a>
+          <a href="/cdn-cgi/l/email-protection#8ae2efe6e6e5cae5fcf8e3e7e5a4e9e5e7"><span class="__cf_email__" data-cfemail="92faf7fefefdd2fde4e0fbfffdbcf1fdff">[email&#160;protected]</span></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ========== ABOUT PAGE ========== -->
+<div class="page" id="page-about">
+  <section class="page-hero">
+    <div class="page-hero-bg">
+      <div class="page-hero-orb page-hero-orb-1"></div>
+      <div class="page-hero-orb page-hero-orb-2"></div>
+    </div>
+    <div class="container page-hero-content">
+      <div class="eyebrow">About Us</div>
+      <h1 class="display-xl" style="max-width:700px;margin-bottom:1.25rem;">We're Ovrimo.<br/><span class="gradient-text">We Build Things.</span></h1>
+      <p class="lead" style="max-width:580px;">Ovrimo builds thoughtful digital products designed to simplify everyday work and life. We create modern apps and tools focused on clarity, usefulness, and clean design.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="about-grid">
+        <div>
+          <div class="eyebrow">Our Story</div>
+          <h2 class="display-md" style="margin-bottom:1.25rem;">Started with a simple idea</h2>
+          <p style="color:var(--text2);line-height:1.8;margin-bottom:1.25rem;">Ovrimo LLC was founded on a straightforward belief: the best software gets out of your way. We create modern apps and tools focused on clarity, usefulness, and clean design — in a world full of bloated apps and feature-chasing products, we wanted to build something different.</p>
+          <p style="color:var(--text2);line-height:1.8;margin-bottom:1.25rem;">We started with productivity. Specifically, the problem of staying focused and organized without needing a complex system to manage the system. ModeDo was our first answer to that question — available now at <a href="https://www.modedo.app" target="_blank" style="color:var(--accent);">modedo.app</a>.</p>
+          <p style="color:var(--text2);line-height:1.8;">Our products are built to feel simple, reliable, and genuinely helpful. Ovrimo is independently run — no VC pressure, no pivot cycles. Just thoughtful software we're proud of, growing sustainably from there.</p>
+        </div>
+        <div class="about-visual">
+          <div class="about-logo-display">
+            <div style="width:160px;height:160px;background:linear-gradient(135deg,rgba(59,158,255,0.1),rgba(0,212,200,0.1));border-radius:50%;display:flex;align-items:center;justify-content:center;border:1px solid rgba(59,158,255,0.2);">
+              <div style="width:100px;height:100px;background:linear-gradient(135deg,#3b9eff,#00d4c8);border-radius:26px;display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-size:3rem;font-weight:800;color:white;box-shadow:0 12px 40px rgba(59,158,255,0.4);">O</div>
+            </div>
+          </div>
+          <div style="border-top:1px solid var(--border);padding-top:1.5rem;display:grid;grid-template-columns:1fr 1fr;gap:1rem;text-align:center;">
+            <div><div style="font-family:'Sora',sans-serif;font-size:1.75rem;font-weight:800;color:var(--accent);">2024</div><div style="font-size:0.8rem;color:var(--text3);">Founded</div></div>
+            <div><div style="font-family:'Sora',sans-serif;font-size:1.75rem;font-weight:800;color:var(--accent2);">US</div><div style="font-size:0.8rem;color:var(--text3);">Based</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MISSION -->
+      <div class="mission-block">
+        <p class="mission-text">Our products are built to feel simple, reliable, and genuinely helpful — earning a place in people's lives by being worth their time, not by locking them in.</p>
+      </div>
+
+      <!-- VALUES -->
+      <div class="eyebrow" style="margin-bottom:1rem;">What We Stand For</div>
+      <h2 class="display-md" style="margin-bottom:3rem;">Our Values</h2>
+      <div class="values-grid">
+        <div class="value-card">
+          <span class="value-emoji">✦</span>
+          <h3>Simplicity</h3>
+          <p>We cut until what remains is exactly what's needed. Complexity is never a feature.</p>
+        </div>
+        <div class="value-card">
+          <span class="value-emoji">🎯</span>
+          <h3>Usefulness</h3>
+          <p>Products should solve real problems for real people. If it doesn't help, it doesn't ship.</p>
+        </div>
+        <div class="value-card">
+          <span class="value-emoji">🤝</span>
+          <h3>Trust</h3>
+          <p>We respect our users' time, data, and attention. No dark patterns. No manipulation.</p>
+        </div>
+        <div class="value-card">
+          <span class="value-emoji">🔭</span>
+          <h3>Curiosity</h3>
+          <p>We stay curious about problems, tools, and ideas. Innovation follows genuine interest.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- FOOTER REPEATED -->
+  <footer>
+    <div class="container">
+      <div class="footer-bottom" style="border-top:none;padding-top:0;">
+        <div>© 2025 Ovrimo LLC. All rights reserved.</div>
+        <div class="footer-legal">
+          <a onclick="navigate('privacy')">Privacy</a>
+          <a onclick="navigate('terms')">Terms</a>
+          <a href="/cdn-cgi/l/email-protection#6008050c0c0f200f1612090d0f4e030f0d"><span class="__cf_email__" data-cfemail="076f626b6b68476871756e6a682964686a">[email&#160;protected]</span></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ========== PRODUCTS PAGE ========== -->
+<div class="page" id="page-products">
+  <section class="page-hero">
+    <div class="page-hero-bg">
+      <div class="page-hero-orb page-hero-orb-1"></div>
+      <div class="page-hero-orb page-hero-orb-2"></div>
+    </div>
+    <div class="container page-hero-content">
+      <div class="eyebrow">Products</div>
+      <h1 class="display-xl" style="max-width:700px;margin-bottom:1.25rem;">What We've<br/><span class="gradient-text">Built So Far</span></h1>
+      <p class="lead" style="max-width:560px;">We create modern apps and tools focused on clarity, usefulness, and clean design. Here's what we've shipped — with more on the way.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="products-grid" id="productsGrid">
+        <!-- rendered by JS -->
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-bottom" style="border-top:none;padding-top:0;">
+        <div>© 2025 Ovrimo LLC. All rights reserved.</div>
+        <div class="footer-legal">
+          <a onclick="navigate('privacy')">Privacy</a>
+          <a onclick="navigate('terms')">Terms</a>
+          <a href="/cdn-cgi/l/email-protection#82eae7eeeeedc2edf4f0ebefedace1edef"><span class="__cf_email__" data-cfemail="3c54595050537c534a4e555153125f5351">[email&#160;protected]</span></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ========== PRODUCT DETAIL PAGE ========== -->
+<div class="page" id="page-product-detail">
+  <div id="productDetailContent"></div>
+</div>
+
+<!-- ========== CONTACT PAGE ========== -->
+<div class="page" id="page-contact">
+  <section class="page-hero">
+    <div class="page-hero-bg">
+      <div class="page-hero-orb page-hero-orb-1"></div>
+    </div>
+    <div class="container page-hero-content">
+      <div class="eyebrow">Contact</div>
+      <h1 class="display-xl" style="max-width:700px;margin-bottom:1.25rem;">Let's <span class="gradient-text">Talk</span></h1>
+      <p class="lead" style="max-width:520px;">Have a question, feedback, or want to work with us? We'd love to hear from you.</p>
+    </div>
+  </section>
+
+  <section class="section-sm">
+    <div class="container">
+      <div class="contact-grid">
+        <div>
+          <div class="eyebrow" style="margin-bottom:2rem;">Get in Touch</div>
+          <div class="contact-info-item">
+            <div class="ci-icon">📧</div>
+            <div>
+              <div class="ci-label">Email</div>
+              <div class="ci-value"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f8909d949497b8978e8a919597d69b9795">[email&#160;protected]</a></div>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div class="ci-icon">🌐</div>
+            <div>
+              <div class="ci-label">Website</div>
+              <div class="ci-value">ovrimo.com</div>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div class="ci-icon">🏢</div>
+            <div>
+              <div class="ci-label">Company</div>
+              <div class="ci-value">Ovrimo LLC · United States</div>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div class="ci-icon">⏱</div>
+            <div>
+              <div class="ci-label">Response Time</div>
+              <div class="ci-value">Usually within 1–2 business days</div>
+            </div>
+          </div>
+
+          <div class="partnerships-block">
+            <h3>💼 Partnership & Business Inquiries</h3>
+            <p style="margin-top:0.5rem;">Interested in collaborating, licensing, or exploring a business opportunity with Ovrimo? Reach out via the contact form and select "Partnership" as the subject. We're open to interesting conversations.</p>
+          </div>
+        </div>
+
+        <div class="contact-form-wrapper">
+          <div id="contactFormArea">
+            <h3 style="font-size:1.2rem;font-weight:700;margin-bottom:2rem;">Send a Message</h3>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="cf-name">Name *</label>
+                <input class="form-input" id="cf-name" type="text" placeholder="Your name"/>
+                <div class="form-error" id="err-name">Please enter your name.</div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="cf-email">Email *</label>
+                <input class="form-input" id="cf-email" type="email" placeholder="your@email.com"/>
+                <div class="form-error" id="err-email">Please enter a valid email.</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="cf-subject">Subject *</label>
+              <select class="form-select" id="cf-subject">
+                <option value="">Select a subject</option>
+                <option>General Inquiry</option>
+                <option>Product Feedback</option>
+                <option>Partnership</option>
+                <option>Press & Media</option>
+                <option>Bug Report</option>
+                <option>Other</option>
+              </select>
+              <div class="form-error" id="err-subject">Please select a subject.</div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="cf-message">Message *</label>
+              <textarea class="form-textarea" id="cf-message" placeholder="Tell us what's on your mind…"></textarea>
+              <div class="form-error" id="err-message">Please enter a message.</div>
+            </div>
+            <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="submitContactForm()">Send Message →</button>
+          </div>
+          <div class="form-success" id="contactSuccess">
+            <div class="form-success-icon">✅</div>
+            <h3>Message Sent!</h3>
+            <p>Thanks for reaching out. We'll get back to you within 1–2 business days.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-bottom" style="border-top:none;padding-top:0;">
+        <div>© 2025 Ovrimo LLC. All rights reserved.</div>
+        <div class="footer-legal">
+          <a onclick="navigate('privacy')">Privacy</a>
+          <a onclick="navigate('terms')">Terms</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ========== PRIVACY PAGE ========== -->
+<div class="page" id="page-privacy">
+  <div class="container">
+    <div class="legal-content">
+      <div class="back-btn" onclick="navigate('home')">← Back to Home</div>
+      <h1>Privacy Policy</h1>
+      <div class="legal-date">Last updated: January 1, 2025 &nbsp;·&nbsp; Ovrimo LLC</div>
+      <div class="legal-placeholder">📝 Placeholder: Replace this content with your final legal privacy policy text, reviewed by a qualified attorney.</div>
+      <div class="legal-section">
+        <h2>1. Introduction</h2>
+        <p>Ovrimo LLC ("Ovrimo," "we," "us," or "our") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our products, services, and website (collectively, the "Services").</p>
+        <p>Please read this policy carefully. By using our Services, you agree to the collection and use of information in accordance with this policy.</p>
+      </div>
+      <div class="legal-section">
+        <h2>2. Information We Collect</h2>
+        <p>We may collect the following types of information:</p>
+        <ul>
+          <li><strong>Account Information:</strong> Name, email address, and password when you create an account.</li>
+          <li><strong>Usage Data:</strong> Information about how you interact with our Services, including features used and time spent.</li>
+          <li><strong>Device Information:</strong> Device type, operating system, and unique device identifiers.</li>
+          <li><strong>Communications:</strong> Messages you send us directly, including support requests or feedback.</li>
+        </ul>
+        <div class="legal-placeholder">📝 Add full details of all data collection specific to each Ovrimo product.</div>
+      </div>
+      <div class="legal-section">
+        <h2>3. How We Use Your Information</h2>
+        <p>We use the information we collect to:</p>
+        <ul>
+          <li>Provide, operate, and improve our Services</li>
+          <li>Respond to your inquiries and support requests</li>
+          <li>Send you updates and communications (with your consent)</li>
+          <li>Monitor and analyze usage patterns to improve user experience</li>
+          <li>Comply with legal obligations</li>
+        </ul>
+      </div>
+      <div class="legal-section">
+        <h2>4. Data Sharing</h2>
+        <p>We do not sell your personal information. We may share your information only in limited circumstances:</p>
+        <ul>
+          <li>With service providers who assist in our operations (under strict confidentiality agreements)</li>
+          <li>When required by law or to protect legal rights</li>
+          <li>In the event of a business merger, acquisition, or sale</li>
+        </ul>
+      </div>
+      <div class="legal-section">
+        <h2>5. Data Retention</h2>
+        <div class="legal-placeholder">📝 Specify your data retention periods for each category of data.</div>
+        <p>We retain your data for as long as necessary to provide our Services and comply with our legal obligations.</p>
+      </div>
+      <div class="legal-section">
+        <h2>6. Your Rights</h2>
+        <p>Depending on your location, you may have the right to access, update, delete, or restrict the processing of your personal data. To exercise these rights, contact us at <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="afdfddc6d9ceccd6efc0d9ddc6c2c081ccc0c2">[email&#160;protected]</a>.</p>
+      </div>
+      <div class="legal-section">
+        <h2>7. Security</h2>
+        <p>We implement reasonable technical and organizational measures to protect your information. However, no transmission over the internet is 100% secure.</p>
+      </div>
+      <div class="legal-section">
+        <h2>8. Children's Privacy</h2>
+        <p>Our Services are not directed to children under 13. We do not knowingly collect information from children under 13. If you believe we have collected such information, contact us immediately.</p>
+      </div>
+      <div class="legal-section">
+        <h2>9. Changes to This Policy</h2>
+        <p>We may update this Privacy Policy from time to time. We will notify you of significant changes by updating the date at the top of this page. Your continued use of our Services after changes constitutes acceptance of the updated policy.</p>
+      </div>
+      <div class="legal-section">
+        <h2>10. Contact Us</h2>
+        <p>For privacy-related questions or concerns, contact Ovrimo LLC at: <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c8b8baa1bea9abb188a7bebaa1a5a7e6aba7a5">[email&#160;protected]</a></strong></p>
+        <div class="legal-placeholder">📝 Add your full legal business address here.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== TERMS PAGE ========== -->
+<div class="page" id="page-terms">
+  <div class="container">
+    <div class="legal-content">
+      <div class="back-btn" onclick="navigate('home')">← Back to Home</div>
+      <h1>Terms of Use</h1>
+      <div class="legal-date">Last updated: January 1, 2025 &nbsp;·&nbsp; Ovrimo LLC</div>
+      <div class="legal-placeholder">📝 Placeholder: Replace this content with your final legal terms of use, reviewed by a qualified attorney.</div>
+      <div class="legal-section">
+        <h2>1. Acceptance of Terms</h2>
+        <p>By accessing or using any services, applications, or websites operated by Ovrimo LLC ("Ovrimo," "we," "us"), you agree to be bound by these Terms of Use. If you do not agree, do not use our Services.</p>
+      </div>
+      <div class="legal-section">
+        <h2>2. Use of Services</h2>
+        <p>You may use our Services only for lawful purposes and in accordance with these Terms. You agree not to:</p>
+        <ul>
+          <li>Use the Services in any way that violates applicable law or regulation</li>
+          <li>Attempt to gain unauthorized access to any part of the Services</li>
+          <li>Transmit any unsolicited or unauthorized advertising or spam</li>
+          <li>Interfere with the proper functioning of the Services</li>
+          <li>Copy, modify, or distribute our software without permission</li>
+        </ul>
+      </div>
+      <div class="legal-section">
+        <h2>3. Accounts</h2>
+        <p>To access certain features, you may need to create an account. You are responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account.</p>
+      </div>
+      <div class="legal-section">
+        <h2>4. Intellectual Property</h2>
+        <p>All content, trademarks, logos, and software associated with Ovrimo Services are owned by or licensed to Ovrimo LLC. You may not use, reproduce, or distribute our intellectual property without prior written consent.</p>
+      </div>
+      <div class="legal-section">
+        <h2>5. Disclaimers</h2>
+        <p>Our Services are provided "as is" and "as available" without warranties of any kind, either express or implied. We do not warrant that our Services will be uninterrupted, error-free, or completely secure.</p>
+      </div>
+      <div class="legal-section">
+        <h2>6. Limitation of Liability</h2>
+        <div class="legal-placeholder">📝 Add jurisdiction-specific limitation of liability language here with legal guidance.</div>
+        <p>To the maximum extent permitted by law, Ovrimo LLC shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of our Services.</p>
+      </div>
+      <div class="legal-section">
+        <h2>7. Termination</h2>
+        <p>We reserve the right to suspend or terminate your access to our Services at any time, for any reason, with or without notice, including for violations of these Terms.</p>
+      </div>
+      <div class="legal-section">
+        <h2>8. Governing Law</h2>
+        <div class="legal-placeholder">📝 Specify your governing jurisdiction and applicable law.</div>
+        <p>These Terms shall be governed by the laws of the applicable jurisdiction without regard to its conflict of law provisions.</p>
+      </div>
+      <div class="legal-section">
+        <h2>9. Changes to Terms</h2>
+        <p>We may modify these Terms at any time. We will provide notice of significant changes. Your continued use of our Services after changes constitutes acceptance of the revised Terms.</p>
+      </div>
+      <div class="legal-section">
+        <h2>10. Contact</h2>
+        <p>For questions about these Terms, contact: <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="573b3230363b173821253e3a387934383a">[email&#160;protected]</a></strong></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// ============================
+// PRODUCT DATA SOURCE
+// ============================
+// To add a new product: copy one product object below and update the fields.
+// The site will automatically display it on the Products page and create a detail page.
+
+const PRODUCTS = [
+  {
+    id: 'modedo',
+    slug: 'modedo',
+    name: 'ModeDo',
+    tagline: 'Productivity without the noise.',
+    shortDescription: 'A clean, focused productivity app that helps you organize tasks and stay in flow. Built to feel simple, reliable, and genuinely helpful — without the bloat.',
+    longDescription: 'ModeDo is a productivity app built around a simple idea: your brain works differently at different times of day. Instead of one giant to-do list, ModeDo lets you work in modes — Work, Personal, Focus, and more — so you see only what matters right now.\n\nOur products are built to feel simple, reliable, and genuinely helpful. ModeDo is no exception. There\'s no dashboard to configure, no endless settings — just a clean space to capture what needs to be done and actually do it.\n\nTry it free at modedo.app.',
+    category: 'Productivity App',
+    status: 'live',
+    icon: '✓',
+    heroImage: null,
+    screenshots: [],
+    websiteUrl: 'https://www.modedo.app',
+    appStoreUrl: null,
+    googlePlayUrl: null,
+    features: [
+      { icon: '🎯', title: 'Mode-Based Focus', description: 'Switch between Work, Personal, and Focus modes to see only the tasks relevant to the moment.' },
+      { icon: '✓', title: 'Clean Task Lists', description: 'Create, organize, and complete tasks with a distraction-free interface built for clarity.' },
+      { icon: '⚡', title: 'Fast & Lightweight', description: 'Opens instantly. No loading screens. No bloat. Ready when you are.' },
+      { icon: '📱', title: 'Works Everywhere', description: 'Available on web and mobile so your tasks are always with you, no matter where you work.' },
+      { icon: '🔔', title: 'Smart Reminders', description: 'Set reminders that fit your schedule without overwhelming your notifications.' },
+      { icon: '🔒', title: 'Private by Default', description: 'Your tasks are yours. We don\'t sell your data or use it for advertising.' },
+    ],
+    faq: [
+      { q: 'Is ModeDo free to use?', a: 'ModeDo offers a free tier with core productivity features. Premium features may be available in future updates.' },
+      { q: 'What platforms does ModeDo support?', a: 'ModeDo is available on the web at modedo.app, with mobile apps in development for iOS and Android.' },
+      { q: 'How is ModeDo different from other to-do apps?', a: 'ModeDo is built around modes — contextual views that match how your brain actually works throughout the day. Instead of one overwhelming list, you see what\'s relevant to right now.' },
+      { q: 'Is my data synced across devices?', a: 'Yes. When you create an account, your tasks and preferences sync automatically across all your devices.' },
+    ],
+    featured: true,
+    releaseDate: '2025',
+    seoTitle: 'ModeDo — Simple, Reliable Productivity by Ovrimo',
+    seoDescription: 'ModeDo is a clean, focused productivity app built to feel simple, reliable, and genuinely helpful. Try it free at modedo.app.',
+    relatedProducts: [],
+  },
+  // --- ADD NEW PRODUCTS BELOW THIS LINE ---
+  // {
+  //   id: 'newapp',
+  //   slug: 'newapp',
+  //   name: 'New App Name',
+  //   tagline: 'Short tagline here.',
+  //   shortDescription: 'One paragraph description for the product card.',
+  //   longDescription: 'Longer description for the product detail page.',
+  //   category: 'Category Name',
+  //   status: 'coming-soon', // 'live' | 'coming-soon'
+  //   icon: '🚀',
+  //   websiteUrl: null,
+  //   appStoreUrl: null,
+  //   googlePlayUrl: null,
+  //   features: [
+  //     { icon: '✨', title: 'Feature Name', description: 'Feature description.' },
+  //   ],
+  //   faq: [],
+  //   featured: false,
+  //   releaseDate: 'Coming 2026',
+  //   seoTitle: 'New App — Tagline',
+  //   seoDescription: 'Description for search engines.',
+  // },
+];
+
+// ============================
+// NAVIGATION SYSTEM
+// ============================
+let currentPage = 'home';
+let currentProduct = null;
+
+function navigate(page) {
+  // Hide all
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  // Update nav active
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active-link'));
+
+  if (page.startsWith('product-')) {
+    const slug = page.replace('product-', '');
+    const product = PRODUCTS.find(p => p.slug === slug);
+    if (product) {
+      currentProduct = product;
+      renderProductDetail(product);
+      document.getElementById('page-product-detail').classList.add('active');
+    }
+  } else if (page === 'products') {
+    renderProducts();
+    document.getElementById('page-products').classList.add('active');
+    document.getElementById('nav-products').classList.add('active-link');
+  } else if (page === 'about') {
+    document.getElementById('page-about').classList.add('active');
+    document.getElementById('nav-about').classList.add('active-link');
+  } else if (page === 'contact') {
+    document.getElementById('page-contact').classList.add('active');
+    document.getElementById('nav-contact').classList.add('active-link');
+  } else if (page === 'privacy') {
+    document.getElementById('page-privacy').classList.add('active');
+  } else if (page === 'terms') {
+    document.getElementById('page-terms').classList.add('active');
+  } else {
+    document.getElementById('page-home').classList.add('active');
+    document.getElementById('nav-home').classList.add('active-link');
+  }
+
+  currentPage = page;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function toggleMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+function closeMenu() {
+  document.getElementById('mobileMenu').classList.remove('open');
+}
+
+// ============================
+// RENDER PRODUCTS GRID
+// ============================
+function renderProducts() {
+  const grid = document.getElementById('productsGrid');
+  grid.innerHTML = PRODUCTS.map(p => `
+    <div class="product-card">
+      <div class="pc-header">
+        <div class="pc-icon">${p.icon}</div>
+        <span class="badge badge-${p.status === 'live' ? 'live' : 'soon'}">${p.status === 'live' ? 'Live' : 'Coming Soon'}</span>
+      </div>
+      <div class="pc-category">${p.category}</div>
+      <div class="pc-name">${p.name}</div>
+      <div class="pc-tagline">${p.tagline}</div>
+      <div class="pc-desc">${p.shortDescription}</div>
+      <div class="pc-footer">
+        <div class="pc-links">
+          <button class="btn btn-primary btn-sm" onclick="navigate('product-${p.slug}')">View Details</button>
+          ${p.websiteUrl ? `<a href="${p.websiteUrl}" target="_blank" class="btn btn-secondary btn-sm">Visit ↗</a>` : ''}
+        </div>
+        ${p.featured ? '<span style="font-size:0.75rem;color:var(--accent);font-weight:600;font-family:Sora,sans-serif;">★ Featured</span>' : ''}
+      </div>
+    </div>
+  `).join('');
+}
+
+// ============================
+// RENDER PRODUCT DETAIL
+// ============================
+function renderProductDetail(p) {
+  const html = `
+    <div style="background:var(--bg);min-height:100vh;">
+      <section class="pd-hero" style="background:var(--bg);">
+        <div class="container page-hero-content">
+          <div class="back-btn" onclick="navigate('products')">← All Products</div>
+          <div class="pd-hero-inner">
+            <div>
+              <div class="pd-icon-wrap">
+                <div class="pd-icon">${p.icon}</div>
+                <span class="badge badge-${p.status === 'live' ? 'live' : 'soon'}">${p.status === 'live' ? 'Live' : 'Coming Soon'}</span>
+              </div>
+              <div class="pd-name gradient-text">${p.name}</div>
+              <div class="pd-tagline">${p.tagline}</div>
+              <div class="pd-actions">
+                ${p.websiteUrl ? `<a href="${p.websiteUrl}" target="_blank" class="btn btn-primary btn-lg">Visit ${p.name} ↗</a>` : ''}
+                ${p.appStoreUrl ? `<a href="${p.appStoreUrl}" target="_blank" class="btn btn-secondary btn-lg">App Store</a>` : ''}
+                ${p.googlePlayUrl ? `<a href="${p.googlePlayUrl}" target="_blank" class="btn btn-secondary btn-lg">Google Play</a>` : ''}
+                <button class="btn btn-ghost btn-lg" onclick="navigate('contact')">Contact Us</button>
+              </div>
+            </div>
+            <div class="pd-mockup-area">
+              <div class="pd-screenshot-placeholder">
+                <div class="pd-screenshot-icon">${p.icon}</div>
+                <div style="font-size:0.85rem;font-weight:600;">Screenshots coming soon</div>
+                <div style="font-size:0.8rem;margin-top:0.25rem;">Visit ${p.websiteUrl || 'the website'} to see it in action</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="pd-content">
+        <!-- ABOUT -->
+        <div class="pd-section">
+          <div class="eyebrow">About ${p.name}</div>
+          <h2 class="display-md" style="margin-bottom:1.5rem;max-width:560px;">${p.shortDescription}</h2>
+          ${p.longDescription.split('\n\n').map(para => `<p style="color:var(--text2);line-height:1.8;margin-bottom:1rem;max-width:680px;">${para}</p>`).join('')}
+        </div>
+
+        <!-- FEATURES -->
+        <div class="pd-section">
+          <div class="eyebrow">Features</div>
+          <h2 class="display-md" style="margin-bottom:0.5rem;">What ${p.name} Does</h2>
+          <p style="color:var(--text2);max-width:500px;margin-bottom:0;">Everything you need, nothing you don't.</p>
+          <div class="pd-features-grid">
+            ${p.features.map(f => `
+              <div class="pd-feature">
+                <div class="pd-feature-icon">${f.icon}</div>
+                <h4>${f.title}</h4>
+                <p>${f.description}</p>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+
+        <!-- LINKS -->
+        <div class="pd-section">
+          <div class="eyebrow">Get ${p.name}</div>
+          <h2 class="display-md" style="margin-bottom:0.5rem;">Find It Here</h2>
+          <div class="pd-links-grid">
+            ${p.websiteUrl ? `<div class="pd-link-card" onclick="window.open('${p.websiteUrl}','_blank')"><div class="pd-link-icon">🌐</div><div class="pd-link-label">Website</div><div class="pd-link-value">modedo.app</div></div>` : '<div class="pd-link-card" style="opacity:0.4;cursor:default;"><div class="pd-link-icon">🌐</div><div class="pd-link-label">Website</div><div class="pd-link-value" style="color:var(--text3);">Coming Soon</div></div>'}
+            <div class="pd-link-card" style="${p.appStoreUrl ? '' : 'opacity:0.4;cursor:default;'}" ${p.appStoreUrl ? `onclick="window.open('${p.appStoreUrl}','_blank')"` : ''}>
+              <div class="pd-link-icon">🍎</div>
+              <div class="pd-link-label">iOS App Store</div>
+              <div class="pd-link-value" style="${p.appStoreUrl ? '' : 'color:var(--text3);'}">${p.appStoreUrl ? 'Download' : 'Coming Soon'}</div>
+            </div>
+            <div class="pd-link-card" style="${p.googlePlayUrl ? '' : 'opacity:0.4;cursor:default;'}" ${p.googlePlayUrl ? `onclick="window.open('${p.googlePlayUrl}','_blank')"` : ''}>
+              <div class="pd-link-icon">🤖</div>
+              <div class="pd-link-label">Google Play</div>
+              <div class="pd-link-value" style="${p.googlePlayUrl ? '' : 'color:var(--text3);'}">${p.googlePlayUrl ? 'Download' : 'Coming Soon'}</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ -->
+        ${p.faq && p.faq.length > 0 ? `
+        <div class="pd-section">
+          <div class="eyebrow">FAQ</div>
+          <h2 class="display-md" style="margin-bottom:2rem;">Common Questions</h2>
+          <div class="pd-faq">
+            ${p.faq.map((item, i) => `
+              <div class="faq-item" id="faq-${p.slug}-${i}">
+                <div class="faq-q" onclick="toggleFaq('faq-${p.slug}-${i}')">
+                  <span>${item.q}</span>
+                  <span class="faq-chevron">▾</span>
+                </div>
+                <div class="faq-a">${item.a}</div>
+              </div>
+            `).join('')}
+          </div>
+        </div>` : ''}
+
+        <!-- CHANGELOG PLACEHOLDER -->
+        <div class="pd-section">
+          <div class="eyebrow">Updates</div>
+          <h2 class="display-md" style="margin-bottom:1rem;">Changelog</h2>
+          <div style="background:var(--surface);border:1px dashed var(--border2);border-radius:var(--radius);padding:2rem;text-align:center;color:var(--text3);">
+            <div style="font-size:2rem;margin-bottom:0.75rem;">📋</div>
+            <div style="font-weight:600;margin-bottom:0.25rem;">Changelog coming soon</div>
+            <div style="font-size:0.85rem;">Product updates and release notes will appear here.</div>
+          </div>
+        </div>
+      </div>
+
+      <footer style="background:var(--bg2);border-top:1px solid var(--border);padding:2rem 0;">
+        <div class="container">
+          <div class="footer-bottom" style="border-top:none;padding-top:0;">
+            <div>© 2025 Ovrimo LLC. All rights reserved.</div>
+            <div class="footer-legal">
+              <a onclick="navigate('privacy')">Privacy</a>
+              <a onclick="navigate('terms')">Terms</a>
+              <a href="mailto:hello@ovrimo.com">hello@ovrimo.com</a>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  `;
+  document.getElementById('productDetailContent').innerHTML = html;
+}
+
+function toggleFaq(id) {
+  const item = document.getElementById(id);
+  item.classList.toggle('open');
+}
+
+// ============================
+// CONTACT FORM
+// ============================
+function submitContactForm() {
+  let valid = true;
+
+  const name = document.getElementById('cf-name').value.trim();
+  const email = document.getElementById('cf-email').value.trim();
+  const subject = document.getElementById('cf-subject').value;
+  const message = document.getElementById('cf-message').value.trim();
+
+  // Reset errors
+  ['name','email','subject','message'].forEach(f => {
+    document.getElementById('err-'+f).classList.remove('show');
+    document.getElementById('cf-'+f).style.borderColor = '';
+  });
+
+  if (!name) { showError('name'); valid = false; }
+  if (!email || !email.includes('@')) { showError('email'); valid = false; }
+  if (!subject) { showError('subject'); valid = false; }
+  if (!message) { showError('message'); valid = false; }
+
+  if (valid) {
+    document.getElementById('contactFormArea').style.display = 'none';
+    document.getElementById('contactSuccess').classList.add('show');
+ 

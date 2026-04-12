@@ -1,0 +1,87 @@
+import type { Product } from "@/types/product";
+
+export const products: Product[] = [
+  {
+    id: "modedo",
+    slug: "modedo",
+    name: "ModeDo",
+    tagline: "A productivity app organized around how you actually work.",
+    shortDescription:
+      "ModeDo helps people organize tasks with less noise, clearer context, and a calmer daily workflow.",
+    longDescription: [
+      "ModeDo is a productivity-focused app built around modes so people can separate work, personal tasks, planning, and focus time without wrestling with one crowded list.",
+      "The product is designed to feel lightweight and practical. It gives users a clear place to capture tasks, move through priorities, and stay oriented throughout the day.",
+      "As Ovrimo adds more software over time, ModeDo sets the tone for the kind of products we want to build: thoughtful tools that are useful, simple, and polished.",
+    ],
+    category: "Productivity App",
+    status: "live",
+    icon: "/products/modedo-icon.svg",
+    heroImage: "/products/modedo-hero.svg",
+    screenshots: [
+      {
+        src: "/products/modedo-screen-1.svg",
+        alt: "ModeDo dashboard placeholder",
+        caption: "A clean daily view focused on the tasks that matter right now.",
+      },
+      {
+        src: "/products/modedo-screen-2.svg",
+        alt: "ModeDo modes placeholder",
+        caption: "Mode-based organization helps users switch context without clutter.",
+      },
+    ],
+    websiteUrl: "https://www.modedo.app",
+    features: [
+      {
+        title: "Mode-based organization",
+        description:
+          "Separate tasks by context so people can focus on the right work at the right time.",
+      },
+      {
+        title: "Clean daily planning",
+        description:
+          "A simple interface keeps planning readable and avoids unnecessary overhead.",
+      },
+      {
+        title: "Helpful structure",
+        description:
+          "Tasks, reminders, and flow are organized to support follow-through instead of distraction.",
+      },
+      {
+        title: "Cross-device access",
+        description:
+          "ModeDo is available on the web today, with room for expanded platform support later.",
+      },
+    ],
+    faq: [
+      {
+        question: "What does ModeDo do?",
+        answer:
+          "ModeDo is a productivity app that helps people organize and complete tasks using clear modes instead of one crowded task list.",
+      },
+      {
+        question: "Where can I access ModeDo?",
+        answer: "ModeDo is available on the web at modedo.app.",
+      },
+      {
+        question: "Is ModeDo the only Ovrimo product?",
+        answer:
+          "It is the first live product listed on the site. The product system is set up so more Ovrimo apps and tools can be added later without changing page templates.",
+      },
+    ],
+    featured: true,
+    releaseDate: "2026",
+    seoTitle: "ModeDo | Productivity App by Ovrimo",
+    seoDescription:
+      "Learn about ModeDo, a productivity app from Ovrimo designed to keep planning clear, focused, and practical.",
+    relatedProductSlugs: [],
+    links: [{ label: "Visit website", href: "https://www.modedo.app" }],
+    updates: [
+      {
+        title: "Product listing launched",
+        summary:
+          "ModeDo is now listed as the first live Ovrimo product on the company site.",
+        date: "March 2026",
+      },
+    ],
+  },
+];

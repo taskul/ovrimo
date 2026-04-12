@@ -1,0 +1,24 @@
+<svg width="1200" height="440" viewBox="0 0 1200 440" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="440" rx="32" fill="#0F172A"/>
+  <g transform="translate(90 66)">
+    <path d="M182 62C144 61 99 87 74 126C55 156 58 183 81 196C108 210 155 194 187 161C214 134 222 100 205 80C200 74 192 68 182 62Z" stroke="url(#paint0_linear)" stroke-width="17" stroke-linecap="round"/>
+    <path d="M160 84C130 85 96 104 78 130C63 152 66 174 83 184C104 196 141 184 167 161C190 141 197 113 184 97C180 92 171 88 160 84Z" stroke="url(#paint1_linear)" stroke-width="13" stroke-linecap="round"/>
+    <circle cx="192" cy="50" r="15" fill="url(#paint2_linear)"/>
+  </g>
+  <text x="408" y="245" fill="#F8FAFC" font-family="Arial, sans-serif" font-size="164" font-weight="700" letter-spacing="-8">Ovrimo</text>
+  <defs>
+    <linearGradient id="paint0_linear" x1="55" y1="204" x2="217" y2="61" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#60A5FA"/>
+      <stop offset="0.5" stop-color="#3B82F6"/>
+      <stop offset="1" stop-color="#67E8F9"/>
+    </linearGradient>
+    <linearGradient id="paint1_linear" x1="69" y1="183" x2="187" y2="84" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1D4ED8"/>
+      <stop offset="1" stop-color="#99F6E4"/>
+    </linearGradient>
+    <linearGradient id="paint2_linear" x1="177" y1="65" x2="207" y2="35" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#22D3EE"/>
+      <stop offset="1" stop-color="#5EEAD4"/>
+    </linearGradient>
+  </defs>
+</svg>
