@@ -13,14 +13,13 @@ export function NewsletterPlaceholder() {
       <div className="grid gap-6 md:grid-cols-[1fr_auto] md:items-end">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.28em] text-cyan-300">
-            Newsletter Placeholder
+            Stay In Touch
           </p>
           <h3 className="mt-3 font-heading text-2xl font-semibold text-white">
-            Keep room for company updates later
+            Subscribe to the newsletter
           </h3>
           <p className="mt-3 max-w-xl text-slate-300">
-            This section is ready for a future mailing list. For now, it can
-            forward interested people to your contact email.
+            Enter your email address to receive updates on new products and company news.
           </p>
         </div>
         <form

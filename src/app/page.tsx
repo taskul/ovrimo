@@ -159,7 +159,7 @@ export default function HomePage() {
       <SectionShell
         eyebrow="Featured Product"
         title="ModeDo"
-        description="ModeDo is the first live Ovrimo product. It appears here, on the products page, and on its own detail page from the same shared data source."
+        description="An AI-powered productivity app that helps you focus and get more done."
       >
         <div className="grid gap-10 rounded-[36px] border border-white/10 bg-white/5 p-6 lg:grid-cols-[1fr_1.05fr] lg:p-8">
           <div className="flex flex-col justify-between">
@@ -260,7 +260,7 @@ export default function HomePage() {
       <SectionShell
         eyebrow="Products"
         title="Current listings"
-        description="Products are rendered from a single shared data source, which keeps the homepage, products page, and detail pages in sync."
+        description="These are the current products Ovrimo has to offer."
       >
         <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           {allProducts.map((product) => (
@@ -271,14 +271,16 @@ export default function HomePage() {
 
       <SectionShell
         eyebrow="Latest Updates"
-        title="A simple placeholder for future company and product news."
+        title="Upcoming launches"
+        description="These are the upcoming products Ovrimo has to offer."
       >
         <UpdatesPlaceholder />
       </SectionShell>
 
       <SectionShell
         eyebrow="Stay In Touch"
-        title="Leave room for updates, launches, and future announcements."
+        title="Subscribe to Ovrimo"
+        description="Enter your email address to receive updates on new products and company news."
       >
         <NewsletterPlaceholder />
       </SectionShell>

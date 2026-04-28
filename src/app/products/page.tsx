@@ -23,14 +23,14 @@ export default function ProductsPage() {
     <>
       <PageHero
         eyebrow="Products"
-        title="A reusable product system for current and future Ovrimo products."
-        description="Every listing on this page is rendered from the shared product data file, which means new products can be added without rewriting page layouts."
+        title="Our current products"
+        description=""
       />
 
       <StatusSection
         eyebrow="Live Products"
         title="Available now"
-        description="Current products with active links and dedicated detail pages."
+        description="These products are currently available."
         productsCount={liveProducts.length}
       >
         <ProductGrid products={liveProducts} emptyText="No live products listed yet." />
@@ -39,7 +39,7 @@ export default function ProductsPage() {
       <StatusSection
         eyebrow="Coming Soon"
         title="Planned listings"
-        description="Reserve space for future products without rebuilding the site."
+        description="These products are not yet available."
         productsCount={comingSoonProducts.length}
       >
         <ProductGrid
@@ -48,17 +48,6 @@ export default function ProductsPage() {
         />
       </StatusSection>
 
-      <StatusSection
-        eyebrow="Archived"
-        title="Previous products"
-        description="Older listings can stay discoverable without appearing as active products."
-        productsCount={archivedProducts.length}
-      >
-        <ProductGrid
-          products={archivedProducts}
-          emptyText="No archived products listed right now."
-        />
-      </StatusSection>
     </>
   );
 }
