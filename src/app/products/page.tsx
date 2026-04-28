@@ -44,7 +44,7 @@ export default function ProductsPage() {
       >
         <ProductGrid
           products={comingSoonProducts}
-          emptyText="No coming-soon products yet. Add a new product object to display one here."
+          emptyText="No coming-soon products yet."
         />
       </StatusSection>
 

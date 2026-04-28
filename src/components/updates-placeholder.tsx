@@ -1,19 +1,14 @@
 const updates = [
   {
-    title: "Company site launch",
+    title: "ModeDo is live",
     summary:
-      "The new Ovrimo website is set up for product listings, legal pages, and future updates.",
+      "TModeDo AI powdered productivity app is now available for download.",
   },
   {
-    title: "Product system ready",
+    title: "We are live.",
     summary:
-      "New live, coming-soon, or archived products can be added from one shared data file.",
-  },
-  {
-    title: "More updates later",
-    summary:
-      "This section can be replaced with company news, release notes, or product announcements.",
-  },
+      "Ovrimo is now live on the web!",
+  }
 ];
 
 export function UpdatesPlaceholder() {

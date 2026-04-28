@@ -137,20 +137,20 @@ export default function HomePage() {
       </section>
 
       <SectionShell
-        eyebrow="Value"
-        title="A professional company site built to grow with the business."
-        description="This site is structured so Ovrimo can add products, update copy, and expand pages without redesigning the foundation."
+        eyebrow="What We Build"
+        title="Apps, tools, and future software products."
+        description="Ovrimo is set up to present current products clearly while leaving room to add more over time."
       >
         <div className="grid gap-6 md:grid-cols-3">
           {buildItems.map((item) => (
             <article
               key={item.title}
-              className="rounded-[28px] border border-white/10 bg-white/5 p-6"
+              className="rounded-[28px] border border-white/10 bg-[linear-gradient(180deg,rgba(15,23,42,0.9),rgba(15,23,42,0.55))] p-6"
             >
-              <h3 className="font-heading text-2xl font-semibold text-white">
+              <div className="mb-5 inline-flex rounded-2xl border border-white/10 bg-white/6 px-4 py-2 text-sm font-semibold text-cyan-200">
                 {item.title}
-              </h3>
-              <p className="mt-3 leading-7 text-slate-300">{item.description}</p>
+              </div>
+              <p className="leading-7 text-slate-300">{item.description}</p>
             </article>
           ))}
         </div>
@@ -210,25 +210,7 @@ export default function HomePage() {
         </div>
       </SectionShell>
 
-      <SectionShell
-        eyebrow="What We Build"
-        title="Apps, tools, and future software products."
-        description="Ovrimo is set up to present current products clearly while leaving room to add more over time."
-      >
-        <div className="grid gap-6 md:grid-cols-3">
-          {buildItems.map((item) => (
-            <article
-              key={item.title}
-              className="rounded-[28px] border border-white/10 bg-[linear-gradient(180deg,rgba(15,23,42,0.9),rgba(15,23,42,0.55))] p-6"
-            >
-              <div className="mb-5 inline-flex rounded-2xl border border-white/10 bg-white/6 px-4 py-2 text-sm font-semibold text-cyan-200">
-                {item.title}
-              </div>
-              <p className="leading-7 text-slate-300">{item.description}</p>
-            </article>
-          ))}
-        </div>
-      </SectionShell>
+
 
       <SectionShell
         eyebrow="Why Ovrimo"
