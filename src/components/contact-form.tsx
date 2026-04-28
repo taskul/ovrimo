@@ -126,9 +126,6 @@ export function ContactForm() {
           Please correct the highlighted fields and try again.
         </p>
       ) : null}
-      <p className="mt-4 text-sm leading-6 text-slate-400">
-        This form requires the backend mock API to be running to successfully save messages.
-      </p>
     </div>
   );
 }

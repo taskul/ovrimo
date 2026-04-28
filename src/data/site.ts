@@ -6,7 +6,7 @@ export const siteConfig = {
     "Ovrimo builds thoughtful digital products designed to simplify everyday work and life.",
   extendedDescription:
     "We create modern apps and tools focused on clarity, usefulness, and clean design.",
-  email: "hello@ovrimo.com",
+  email: "ovrimo@gmail.com",
   url: "https://www.ovrimo.com",
   navItems: [
     { href: "/", label: "Home" },

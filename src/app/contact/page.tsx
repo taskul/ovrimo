@@ -19,13 +19,12 @@ export default function ContactPage() {
       <PageHero
         eyebrow="Contact Us"
         title="Get in touch with Ovrimo."
-        description="Use the form below for general questions, partnerships, or business inquiries. The starter currently opens a drafted email so it works immediately without a backend."
+        description="Use the form below for general questions, partnerships, or business inquiries."
       />
 
       <SectionShell
         eyebrow="Contact"
         title="Send a message"
-        description="Replace the placeholder email later or connect the form to your preferred email or CRM workflow."
       >
         <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr]">
           <ContactForm />
@@ -48,9 +47,7 @@ export default function ContactPage() {
                 Business and partnership inquiries
               </h2>
               <p className="mt-4 leading-8 text-slate-300">
-                Use the same contact email for collaboration requests, product
-                partnerships, or general business outreach. You can later split
-                this into dedicated addresses if needed.
+                Please use the contact form for all partnership inquiries.
               </p>
             </aside>
           </div>
