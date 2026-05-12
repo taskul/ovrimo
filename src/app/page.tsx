@@ -50,9 +50,10 @@ const reasons = [
   },
 ];
 
-export default function HomePage() {
-  const allProducts = getProducts();
-  const featuredProduct = getFeaturedProducts()[0] ?? allProducts[0];
+export default async function HomePage() {
+  const allProducts = await getProducts();
+  const featuredProducts = await getFeaturedProducts();
+  const featuredProduct = featuredProducts[0] ?? allProducts[0];
 
   if (!featuredProduct) {
     return null;
