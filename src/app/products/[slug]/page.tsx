@@ -119,8 +119,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
 
       <SectionShell
         eyebrow="Gallery"
-        title="Screenshots and placeholders"
-        description="This block supports real screenshots now and can stay as a placeholder while a product is still evolving."
+        title="Screenshots"
       >
         <ScreenshotGallery screenshots={product.screenshots} />
       </SectionShell>

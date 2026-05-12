@@ -10,7 +10,7 @@ export function ScreenshotGallery({
   if (!screenshots.length) {
     return (
       <div className="rounded-[28px] border border-dashed border-white/15 bg-white/4 p-10 text-center text-slate-300">
-        Product screenshots can be added here later by updating the product data file.
+
       </div>
     );
   }
