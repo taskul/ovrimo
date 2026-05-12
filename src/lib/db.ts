@@ -138,6 +138,10 @@ export async function addSubscription(sub: Omit<Subscription, 'createdAt'>) {
   `;
 }
 
+export async function deleteSubscription(id: string) {
+  await sql`DELETE FROM subscriptions WHERE id = ${id}`;
+}
+
 // Newsletters
 export async function getNewsletters(): Promise<Newsletter[]> {
   const result = await sql`SELECT * FROM newsletters ORDER BY created_at DESC`;

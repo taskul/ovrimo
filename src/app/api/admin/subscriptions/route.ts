@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getSubscriptions, addSubscription } from '@/lib/db';
+import { getSubscriptions, addSubscription, deleteSubscription } from '@/lib/db';
 
 export async function GET() {
     const subscriptions = await getSubscriptions();
@@ -50,11 +50,7 @@ export async function PUT(request: Request) {
 export async function DELETE(request: Request) {
     try {
         const { id } = await request.json();
-        const db = getDb();
-
-        db.subscriptions = db.subscriptions.filter(s => s.id !== id);
-        saveDb(db);
-
+        await deleteSubscription(id);
         return NextResponse.json({ success: true });
     } catch (error) {
         return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
