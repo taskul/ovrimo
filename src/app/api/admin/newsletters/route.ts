@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getNewsletters, addNewsletter } from '@/lib/db';
+import { getNewsletters, addNewsletter, updateNewsletter } from '@/lib/db';
 
 export async function GET() {
     const newsletters = await getNewsletters();
@@ -19,7 +19,6 @@ export async function POST(request: Request) {
             subject,
             content,
             sentAt: null,
-            createdAt: new Date().toISOString()
         };
 
         await addNewsletter(newNewsletter);
@@ -34,21 +33,22 @@ export async function POST(request: Request) {
 export async function PUT(request: Request) {
     try {
         const { id, action } = await request.json();
-        const db = getDb();
+        const newsletters = await getNewsletters();
 
-        const newsletter = db.newsletters.find(n => n.id === id);
+        const newsletter = newsletters.find(n => n.id === id);
         if (!newsletter) {
             return NextResponse.json({ error: 'Newsletter not found' }, { status: 404 });
         }
 
         if (action === 'send') {
-            newsletter.sentAt = new Date().toISOString();
-            saveDb(db);
-            return NextResponse.json({ success: true, newsletter });
+            const sentAt = new Date().toISOString();
+            await updateNewsletter(id, { sentAt });
+            return NextResponse.json({ success: true, newsletter: { ...newsletter, sentAt } });
         }
 
         return NextResponse.json({ error: 'Invalid action' }, { status: 400 });
     } catch (error) {
+        console.error('API Admin Newsletters PUT Error:', error);
         return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
     }
 }

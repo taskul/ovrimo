@@ -157,6 +157,12 @@ export async function addNewsletter(newsletter: Omit<Newsletter, 'createdAt'>) {
   `;
 }
 
+export async function updateNewsletter(id: string, newsletter: Partial<Newsletter>) {
+  if (newsletter.sentAt !== undefined) {
+    await sql`UPDATE newsletters SET sent_at = ${newsletter.sentAt} WHERE id = ${id}`;
+  }
+}
+
 // Products
 export async function getProducts(): Promise<Product[]> {
   const result = await sql`SELECT * FROM products ORDER BY created_at DESC`;
