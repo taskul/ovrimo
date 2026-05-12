@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getNewsletters, addNewsletter, updateNewsletter } from '@/lib/db';
+import { getNewsletters, addNewsletter, updateNewsletter, getSubscriptions } from '@/lib/db';
 
 export async function GET() {
     const newsletters = await getNewsletters();
@@ -41,9 +41,21 @@ export async function PUT(request: Request) {
         }
 
         if (action === 'send') {
+            const subscribers = await getSubscriptions();
+            const activeSubscribers = subscribers.filter(s => s.status === 'active');
+            
+            console.log(`Simulating sending newsletter "${newsletter.subject}" to ${activeSubscribers.length} subscribers...`);
+            
+            // In a real app, you would iterate and send emails here:
+            // for (const sub of activeSubscribers) { await sendEmail(sub.email, newsletter.subject, newsletter.content); }
+
             const sentAt = new Date().toISOString();
             await updateNewsletter(id, { sentAt });
-            return NextResponse.json({ success: true, newsletter: { ...newsletter, sentAt } });
+            return NextResponse.json({ 
+                success: true, 
+                newsletter: { ...newsletter, sentAt },
+                recipientCount: activeSubscribers.length
+            });
         }
 
         return NextResponse.json({ error: 'Invalid action' }, { status: 400 });

@@ -80,6 +80,7 @@ export function ContactForm() {
           id="name"
           value={form.name}
           error={errors.name}
+          maxLength={100}
           onChange={(value) => setForm((current) => ({ ...current, name: value }))}
         />
         <Field
@@ -88,6 +89,7 @@ export function ContactForm() {
           type="email"
           value={form.email}
           error={errors.email}
+          maxLength={100}
           onChange={(value) => setForm((current) => ({ ...current, email: value }))}
         />
         <Field
@@ -95,6 +97,7 @@ export function ContactForm() {
           id="subject"
           value={form.subject}
           error={errors.subject}
+          maxLength={200}
           onChange={(value) =>
             setForm((current) => ({ ...current, subject: value }))
           }
@@ -105,6 +108,7 @@ export function ContactForm() {
           multiline
           value={form.message}
           error={errors.message}
+          maxLength={2000}
           onChange={(value) =>
             setForm((current) => ({ ...current, message: value }))
           }
@@ -137,6 +141,7 @@ type FieldProps = {
   error?: string;
   type?: string;
   multiline?: boolean;
+  maxLength?: number;
   onChange: (value: string) => void;
 };
 
@@ -147,6 +152,7 @@ function Field({
   error,
   type = "text",
   multiline = false,
+  maxLength,
   onChange,
 }: FieldProps) {
   const className =
@@ -164,6 +170,7 @@ function Field({
         <textarea
           id={id}
           value={value}
+          maxLength={maxLength}
           onChange={(event) => onChange(event.target.value)}
           rows={6}
           className={className}
@@ -173,6 +180,7 @@ function Field({
           id={id}
           type={type}
           value={value}
+          maxLength={maxLength}
           onChange={(event) => onChange(event.target.value)}
           className={className}
         />
