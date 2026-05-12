@@ -19,14 +19,15 @@ type ProductPageProps = {
 };
 
 export async function generateStaticParams() {
-  return getProducts().map((product) => ({ slug: product.slug }));
+  const products = await getProducts();
+  return products.map((product) => ({ slug: product.slug }));
 }
 
 export async function generateMetadata({
   params,
 }: ProductPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const product = getProductBySlug(slug);
+  const product = await getProductBySlug(slug);
 
   if (!product) {
     return createMetadata({
@@ -45,13 +46,13 @@ export async function generateMetadata({
 
 export default async function ProductDetailPage({ params }: ProductPageProps) {
   const { slug } = await params;
-  const product = getProductBySlug(slug);
+  const product = await getProductBySlug(slug);
 
   if (!product) {
     notFound();
   }
 
-  const relatedProducts = getRelatedProducts(product.relatedProductSlugs);
+  const relatedProducts = await getRelatedProducts(product.relatedProductSlugs);
 
   return (
     <>

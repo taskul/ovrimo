@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getDb, saveDb } from '@/lib/db';
+import { addMessage } from '@/lib/db';
 
 export async function POST(request: Request) {
     try {
@@ -10,19 +10,13 @@ export async function POST(request: Request) {
             return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
         }
 
-        const db = getDb();
-
-        const newMessage = {
+        await addMessage({
             id: Math.random().toString(36).substring(2, 15),
             name,
             email,
             subject,
             message,
-            createdAt: new Date().toISOString(),
-        };
-
-        db.messages.push(newMessage);
-        saveDb(db);
+        });
 
         return NextResponse.json({ success: true, message: 'Message sent successfully' });
     } catch (error) {

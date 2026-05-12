@@ -4,8 +4,10 @@ export async function POST(request: Request) {
     try {
         const { username, password } = await request.json();
 
-        // Use hardcoded admin credentials for the prototype
-        if (username === 'admin' && password === 'admin') {
+        const ADMIN_USERNAME = process.env.ADMIN_USERNAME || 'admin';
+        const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'admin';
+
+        if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
             const response = NextResponse.json({ success: true });
 
             // Set an HttpOnly cookie for session tracking

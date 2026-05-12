@@ -1,16 +1,18 @@
 import { NextResponse } from 'next/server';
-import { getDb, saveDb } from '@/lib/db';
+import { getNewsletters, addNewsletter } from '@/lib/db';
 
 export async function GET() {
-    const db = getDb();
-    const newsletters = [...db.newsletters].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+    const newsletters = await getNewsletters();
     return NextResponse.json({ newsletters });
 }
 
 export async function POST(request: Request) {
     try {
         const { subject, content } = await request.json();
-        const db = getDb();
+
+        if (!subject || !content) {
+            return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
+        }
 
         const newNewsletter = {
             id: Math.random().toString(36).substring(2, 15),
@@ -20,11 +22,11 @@ export async function POST(request: Request) {
             createdAt: new Date().toISOString()
         };
 
-        db.newsletters.push(newNewsletter);
-        saveDb(db);
+        await addNewsletter(newNewsletter);
 
         return NextResponse.json({ success: true, newsletter: newNewsletter });
     } catch (error) {
+        console.error('API Admin Newsletters POST Error:', error);
         return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
     }
 }

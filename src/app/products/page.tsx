@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import type { Product } from "@/types/product";
 
 import { PageHero } from "@/components/page-hero";
 import { ProductCard } from "@/components/product-card";
@@ -14,10 +15,10 @@ export const metadata: Metadata = createMetadata({
   path: "/products",
 });
 
-export default function ProductsPage() {
-  const liveProducts = getProductsByStatus("live");
-  const comingSoonProducts = getProductsByStatus("coming-soon");
-  const archivedProducts = getProductsByStatus("archived");
+export default async function ProductsPage() {
+  const liveProducts = await getProductsByStatus("live");
+  const comingSoonProducts = await getProductsByStatus("coming-soon");
+  const archivedProducts = await getProductsByStatus("archived");
 
   return (
     <>
@@ -80,7 +81,7 @@ function ProductGrid({
   products,
   emptyText,
 }: {
-  products: ReturnType<typeof getProductsByStatus>;
+  products: Product[];
   emptyText: string;
 }) {
   if (!products.length) {

@@ -1,21 +1,24 @@
-import { products } from "@/data/products";
+import { getProducts, getProductBySlug as getProductFromDb } from "./db";
 
-export function getProducts() {
-  return products;
+export async function getAllProducts() {
+  return await getProducts();
 }
 
-export function getFeaturedProducts() {
+export async function getFeaturedProducts() {
+  const products = await getAllProducts();
   return products.filter((product) => product.featured);
 }
 
-export function getProductBySlug(slug: string) {
-  return products.find((product) => product.slug === slug);
+export async function getProductBySlug(slug: string) {
+  return await getProductFromDb(slug);
 }
 
-export function getProductsByStatus(status: "live" | "coming-soon" | "archived") {
+export async function getProductsByStatus(status: "live" | "coming-soon" | "archived") {
+  const products = await getAllProducts();
   return products.filter((product) => product.status === status);
 }
 
-export function getRelatedProducts(slugs: string[] = []) {
+export async function getRelatedProducts(slugs: string[] = []) {
+  const products = await getAllProducts();
   return products.filter((product) => slugs.includes(product.slug));
 }
