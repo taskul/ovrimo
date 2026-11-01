@@ -34,7 +34,10 @@ export default function RootLayout({
       lang="en"
       className={`${headingFont.variable} ${bodyFont.variable}`}
     >
-      <body className="bg-slate-950 text-slate-100 antialiased">
+      <body
+        className="bg-slate-950 text-slate-100 antialiased"
+        suppressHydrationWarning
+      >
         <div className="flex min-h-screen flex-col">
           <SiteHeader />
           <main className="flex-1">{children}</main>
