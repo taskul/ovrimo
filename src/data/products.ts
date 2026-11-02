@@ -204,4 +204,100 @@ export const products: Product[] = [
       },
     ],
   },
+  {
+    id: "color-cascade",
+    slug: "color-cascade",
+    name: "Color Cascade",
+    tagline: "Sort the colors. Restore the world.",
+    shortDescription:
+      "Color Cascade is a calm color-sorting puzzle for iPhone. Every tube you finish sends color back into a sleepy grey world, until the whole scene comes back to life.",
+    longDescription: [
+      "Sort colorful pieces into glass tubes until each one holds a single color. Each level has its own miniature world that starts out grey and empty, and every solved puzzle restores it in full color.",
+      "80 handcrafted levels across four chapters, from a hill village to a snowy harbor, each checked to be solvable. Every restored world goes into your World Gallery, where you can revisit and share it.",
+      "Color Cascade is free with ads. There are no ads in the first 10 levels, ads never interrupt a puzzle, and a one-time Remove Ads purchase turns off the ads between levels for good.",
+    ],
+    category: "Puzzle Game",
+    status: "coming-soon",
+    icon: "/products/color-cascade/icon.png",
+    heroImage: "/products/color-cascade/hero.jpg",
+    screenshots: [
+      {
+        src: "/products/color-cascade/screen-play.jpg",
+        alt: "Color Cascade puzzle level and home screen",
+        caption:
+          "Sort the colors into tubes. Every color also has its own symbol, which makes colors easier to tell apart.",
+      },
+      {
+        src: "/products/color-cascade/screen-worlds.jpg",
+        alt: "Color Cascade World Gallery and level map",
+        caption:
+          "Every solved level restores a miniature world and adds it to your World Gallery.",
+      },
+    ],
+    features: [
+      {
+        title: "80 handcrafted levels",
+        description:
+          "Four chapters, from a hill village to a snowy harbor. Every level is checked to be solvable.",
+      },
+      {
+        title: "A world to restore",
+        description:
+          "Each level has its own miniature world, and every world you restore goes into your gallery to revisit and share.",
+      },
+      {
+        title: "Daily Cascade",
+        description: "A fresh puzzle every day, the same for everyone.",
+      },
+      {
+        title: "Fair help",
+        description:
+          "Free undos, a free hint every level, and restarting is always free.",
+      },
+      {
+        title: "Plays offline",
+        description:
+          "No account needed. Sign in with Apple is optional and only backs up your progress and Remove Ads status.",
+      },
+      {
+        title: "Accessible",
+        description:
+          "Every color has its own symbol, plus reduced-motion and high-contrast options.",
+      },
+    ],
+    faq: [
+      {
+        question: "Is Color Cascade free?",
+        answer:
+          "Yes. It's free with ads, which only appear between levels after level 10 and never during a puzzle. A one-time Remove Ads purchase turns them off for good.",
+      },
+      {
+        question: "How do I restore Remove Ads or my progress on a new phone?",
+        answer:
+          "Remove Ads restores from Settings → Ads → Restore purchases with the same Apple ID. To keep your progress, sign in with Apple in Settings → Account; after reinstalling, sign in again and your levels come back. See ovrimo.com/support for details.",
+      },
+      {
+        question: "Where can I get Color Cascade?",
+        answer: "Color Cascade is coming soon to the App Store for iPhone.",
+      },
+    ],
+    featured: true,
+    releaseDate: "2026",
+    seoTitle: "Color Cascade | Color-Sorting Puzzle Game by Ovrimo",
+    seoDescription:
+      "Color Cascade is a calm color-sorting puzzle for iPhone from Ovrimo. Solve 80 handcrafted levels and restore color to miniature worlds.",
+    relatedProductSlugs: [],
+    links: [
+      { label: "Support", href: "https://www.ovrimo.com/support" },
+      { label: "Privacy Policy", href: "https://www.ovrimo.com/privacy#color-cascade" },
+    ],
+    updates: [
+      {
+        title: "Color Cascade announced",
+        summary:
+          "Ovrimo's first game, a color-sorting puzzle with 80 worlds to restore, is coming soon to the App Store.",
+        date: "November 2026",
+      },
+    ],
+  },
 ];

@@ -17,6 +17,8 @@ export const siteConfig = {
   legalItems: [
     { href: "/privacy", label: "Privacy Policy" },
     { href: "/terms", label: "Terms of Use" },
+    { href: "/support", label: "Support" },
+    { href: "/account-deletion", label: "Delete your account" },
   ],
   values: [
     {
